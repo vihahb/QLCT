@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="material_color">#2196f3</color>
+    <color name="colorPrimary">@color/material_color</color>
+    <color name="colorPrimaryDark">@color/material_color</color>
+    <!--<color name="colorPrimary">#da251c</color>-->
+    <!--<color name="colorPrimaryDark">#c22219</color>-->
+    <color name="colorAccent">#1f2e46</color>>
+    <!--#f74c90-->
+    <color name="colorTabSelected">#fff</color>
+    <color name="Gray">#e5787474</color>
+
+    <!-- Button -->
+    <color name="rectage_btn">#2196f3</color>
+    <color name="line">#09daf5</color>
+    <color name="ripple">#24be76</color>
+    <color name="green">#148b53</color>
+    <color name="green_dark">#2fbf5d</color>
+
+    <color name="error">#68abe1</color>
+    <color name="color_37718E">#37718E</color>
+    <color name="color_59C3C3">#59C3C3</color>
+    <color name="color_red">#d13a65</color>
+
+    <color name="child_hb">#329999</color>
+    <color name="white">#fff</color>
+    <color name="Black">#000</color>
+
+    <color name="mes_bg">#039aae</color>
+
+
+</resources>
