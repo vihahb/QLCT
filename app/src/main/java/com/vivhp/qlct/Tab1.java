@@ -100,9 +100,6 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
                 false);
 
 
-
-
-
         dataBaseHelper = new DataBaseHelper(getActivity());
         //Init TextView
         tvDateTime = (TextView) rootView.findViewById(R.id.DateTime);

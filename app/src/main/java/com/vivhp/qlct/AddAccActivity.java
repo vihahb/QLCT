@@ -56,6 +56,7 @@ public class AddAccActivity extends AppCompatActivity {
         //định nghĩa View control
         edit_name = (EditText) findViewById(R.id.name_acc);
         edit_money = (EditText) findViewById(R.id.money_acc);
+        edit_money.addTextChangedListener(new DoiSoTien(edit_money));
         edit_type_money = (EditText) findViewById(R.id.btn_type_acc);
         btnSave = (Button) findViewById(R.id.btnSaveType);
 
@@ -102,7 +103,6 @@ public class AddAccActivity extends AppCompatActivity {
     }
 
     public void addTaiKhoan() {
-
 
         String mes;
 
