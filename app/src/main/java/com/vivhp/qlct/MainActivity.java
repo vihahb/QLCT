@@ -126,20 +126,6 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-//                currentPage = tab.getPosition();
-//
-//                if (currentPage == 0) {
-//                    tabLayout.getTabAt(0).setIcon(tabIconsSelected[0]);
-//                }
-//                if (currentPage == 1) {
-//                    tabLayout.getTabAt(1).setIcon(tabIconsSelected[1]);
-//                }
-//                if (currentPage == 2) {
-//                    tabLayout.getTabAt(2).setIcon(tabIconsSelected[2]);
-//                }
-//                if (currentPage == 3) {
-//                    tabLayout.getTabAt(3).setIcon(tabIconsSelected[3]);
-//                }
             }
         });
     }
@@ -161,32 +147,6 @@ public class MainActivity extends AppCompatActivity
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
     }
-
-//    private void addToTaikhoan(){
-//        //insert taikhoan
-//        Log.d("Inserting: ", "......");
-//        dataBaseHelper.addTaikhoan(new Model_Taikhoan("Tien mat", 120000));
-//        dataBaseHelper.addTaikhoan(new Model_Taikhoan("The tin dung", 220000));
-//        dataBaseHelper.addTaikhoan(new Model_Taikhoan("Tiet Kiem", 320000));
-//
-//        Log.d("Reading: ", ".....");
-//        List<Model_Taikhoan> taikhoanList = dataBaseHelper.getAllTaiKhoan();
-//
-//        for (Model_Taikhoan taikhoan : taikhoanList){
-//            String log = "Loai Tai Khoan: "
-//                    + taikhoan.getId()
-//                    + ", Ten Loai TK: "
-//                    + taikhoan.getTenloaitk()
-//                    + ", So Tien: "
-//                    + taikhoan.getSotien();
-//            Log.d("Tai Khoan: ", log);
-//        }
-//
-//        String tentk = dataBaseHelper.getTaikhoan(3).getTenloaitk().toString();
-//
-//        Toast.makeText(getApplicationContext(), tentk, Toast.LENGTH_LONG).show();
-//
-//    }
 
     class pageAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -236,17 +196,11 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, broadcastAlarmKeyNote.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long time = 60001;
+        long time = 28800000;
         Toast.makeText(this, "Scheduled", Toast.LENGTH_SHORT).show();
         alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + time, time, pendingIntent);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

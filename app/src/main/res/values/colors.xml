@@ -28,5 +28,10 @@
 
     <color name="mes_bg">#039aae</color>
 
+    <color name="group_thu">#16A085</color>
+    <color name="group_chi">#2980B9</color>
+
+    <color name="colorChiClicked">#2980B6</color>
+    <color name="colorThuClicked">#16A089</color>
 
 </resources>

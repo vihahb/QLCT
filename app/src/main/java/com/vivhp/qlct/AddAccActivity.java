@@ -55,8 +55,12 @@ public class AddAccActivity extends AppCompatActivity {
 
         //định nghĩa View control
         edit_name = (EditText) findViewById(R.id.name_acc);
+
+        //Doi tien
         edit_money = (EditText) findViewById(R.id.money_acc);
         edit_money.addTextChangedListener(new DoiSoTien(edit_money));
+
+
         edit_type_money = (EditText) findViewById(R.id.btn_type_acc);
         btnSave = (Button) findViewById(R.id.btnSaveType);
 
@@ -133,7 +137,14 @@ public class AddAccActivity extends AppCompatActivity {
         } else {
             ten = edit_name.getText().toString();
             loai = edit_type_money.getText().toString();
-            sotien = Integer.parseInt(tien = edit_money.getText().toString());
+
+            //Quy doi tien ve int
+            String tiennhap = edit_money.getText().toString();
+            int sotienint = Integer.parseInt(tiennhap.replaceAll("[\\D]", ""));
+            sotien = sotienint;
+            //sotien = Integer.parseInt(tien = edit_money.getText().toString());
+
+
 
             Model_Taikhoan model_taikhoan = new Model_Taikhoan(ten, loai, sotien);
             if (dataBaseHelper.addTaikhoan(model_taikhoan)) {
@@ -165,11 +176,18 @@ public class AddAccActivity extends AppCompatActivity {
             @Override
             public void run() {
                 finish();
-               Bundle bundle = new Bundle();
+//               Bundle bundle = new Bundle();
 //               bundle.putString("addComplete", "ok");
 //                //Set Fragmentclass Arguments
 //                Tab1 tab1 = new Tab1();
 //                tab1.setArguments(bundle);
+
+                //Send Broadcast
+                int reques_int = 1;
+                Intent intent = new Intent("2");
+                intent.putExtra("2", reques_int);
+                intent.putExtra("a", 2);
+                getApplicationContext().sendBroadcast(intent);
             }
         }, milisecond);
         return milisecond;

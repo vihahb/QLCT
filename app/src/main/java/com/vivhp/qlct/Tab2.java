@@ -15,15 +15,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.philliphsu.bottomsheetpickers.date.BottomSheetDatePickerDialog;
+import com.philliphsu.bottomsheetpickers.time.BottomSheetTimePickerDialog;
 import com.vivhp.qlct.DBHelper.DataBaseHelper;
 import com.vivhp.qlct.Model.Model_Phannhom;
 import com.vivhp.qlct.Model.Model_Thongke;
+import com.vivhp.qlct.adapter.AdapterListTab2;
 import com.vivhp.qlct.adapter.ExpandableListViewAdapter;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
@@ -42,27 +47,31 @@ import static com.vivhp.qlct.R.id.DateTime;
  * Created by vivhp on 10/16/2016.
  */
 
-public class Tab2 extends android.support.v4.app.Fragment implements AdapterView.OnItemSelectedListener {
+public class Tab2 extends android.support.v4.app.Fragment implements AdapterView.OnItemSelectedListener,
+        com.philliphsu.bottomsheetpickers.date.BottomSheetDatePickerDialog.OnDateSetListener,
+        BottomSheetTimePickerDialog.OnTimeSetListener {
 
     View rootView;
 
     BroadcastReceiver broadcastReceiver;
     String TAG = "Tab 2";
-    ExpandableListView ex_menu;
-    HashMap<String, ArrayList<Model_Thongke>> mData;
+    ListView lv_group_t2;
+    ArrayList<Model_Thongke> arrModel;
     Spinner spinner_date;
     private String[] arr_date = {"Ngày", "Tháng", "Năm"};
     DataBaseHelper helper;
     String DateTime;
+    Button btn_thu, btn_chi;
     TextView tvSetDateT2, DateTimeT2, tvType;
     ArrayAdapter<String> sp_adapter;
     String Dateqr, time_arg;
+    AdapterListTab2 adapterListTab2;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.tab2_statics, container, false);
+        rootView = inflater.inflate(R.layout.tab2, container, false);
 
-        ex_menu = (ExpandableListView) rootView.findViewById(R.id.ex_menu);
+
 
         spinner_date = (Spinner) rootView.findViewById(R.id.spinner_date);
 
@@ -70,6 +79,8 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
 
         initView();
         broadcast();
+        btnChiSetClick();
+        btnThuSetClick();
 //        getTimeHienTai();
 
         return rootView;
@@ -79,6 +90,14 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
         tvType = (TextView) rootView.findViewById(R.id.tvType);
         tvSetDateT2 = (TextView) rootView.findViewById(R.id.SetDateT2);
         DateTimeT2 = (TextView) rootView.findViewById(R.id.DateTimeT2);
+        lv_group_t2 = (ListView) rootView.findViewById(R.id.lv_tab2);
+        btn_thu = (Button) rootView.findViewById(R.id.btn_thu);
+        btn_chi = (Button) rootView.findViewById(R.id.btn_chi);
+
+        arrModel = new ArrayList<>();
+        adapterListTab2 = new AdapterListTab2(getActivity(), R.layout.list_item_tab2, arrModel);
+        lv_group_t2.setAdapter(adapterListTab2);
+
         initSpinner();
     }
 
@@ -88,6 +107,7 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
         spinner_date.setAdapter(sp_adapter);
         spinner_date.getSelectedItemPosition();
         spinner_date.setOnItemSelectedListener(this);
+        initDataListChi();
     }
 
     public void getTimeHienTai() {
@@ -118,7 +138,8 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String resultDate = String.valueOf(year + "/" + (month + 1) + "/" + dayOfMonth);
                         DateTimeT2.setText(resultDate);
-                        initDataDate();
+                        initDataListThuDate();
+                        initDataListChiDate();
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 pickerDialog.show();
@@ -149,15 +170,21 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
         tvSetDateT2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog pickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String resultDate = year + "/" + (month+1);
-                        DateTimeT2.setText(resultDate);
-                        initData();
-                    }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                pickerDialog.show();
+//                DatePickerDialog pickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                        String resultDate = year + "/" + (month+1);
+//                        DateTimeT2.setText(resultDate);
+//                        initData();
+//                    }
+//                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+//                pickerDialog.show();
+                Calendar now = Calendar.getInstance();
+                BottomSheetDatePickerDialog date = BottomSheetDatePickerDialog.newInstance(Tab2.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH));
+                date.show(getFragmentManager(), "date_picker");
             }
         });
     }
@@ -189,10 +216,31 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String resultDate = String.valueOf(year);
                         DateTimeT2.setText(resultDate);
-                        initData();
+                        initDataListThu();
+                        initDataListChi();
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 pickerDialog.show();
+            }
+        });
+    }
+
+    private void btnChiSetClick() {
+        btn_chi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), getString(R.string.total_chi), Toast.LENGTH_SHORT).show();
+                initDataListChi();
+            }
+        });
+    }
+
+    private void btnThuSetClick() {
+        btn_thu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), getString(R.string.total_thu), Toast.LENGTH_SHORT).show();
+                initDataListThu();
             }
         });
     }
@@ -207,21 +255,24 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
                 getTimeHienTai();
                 time_arg = DateTimeT2.getText().toString();
                 Toast.makeText(getActivity(),"Date: " + time_arg, Toast.LENGTH_SHORT).show();
-                initDataDate();
+                initDataListThu();
+                initDataListChi();
             } if (Dateqr == "Tháng"){
                 tvType.setText("Tháng: ");
                 tvSetDateT2.setText(rootView.getResources().getString(R.string.set_month));
                 getMonth();
                 time_arg = DateTimeT2.getText().toString();
                 Toast.makeText(getActivity(),"Month: " + time_arg, Toast.LENGTH_SHORT).show();
-                initData();
+                initDataListThu();
+                initDataListChi();
             } if (Dateqr == "Năm"){
                 tvType.setText("Năm: ");
                 tvSetDateT2.setText(rootView.getResources().getString(R.string.set_year));
                 getYear();
                 time_arg = DateTimeT2.getText().toString();
                 Toast.makeText(getActivity(),"Year: " + time_arg, Toast.LENGTH_SHORT).show();
-                initData();
+                initDataListThu();
+                initDataListChi();
             }
         }
     }
@@ -231,116 +282,45 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
 
     }
 
-    public void initDataDate(){
-        //Data for Group
-        final List<String> lisHeader = new ArrayList<>();
-        lisHeader.add("Tổng Thu");
-        lisHeader.add("Tổng Chi");
+    private void initDataListChi() {
+        arrModel.clear();
+        arrModel = helper.getGroupChi(DateTimeT2.getText().toString());
 
-        //Data for child
-        mData = new HashMap<>();
-        ArrayList<Model_Thongke> list_Thu = new ArrayList<>();
-        list_Thu = helper.getGroupThuNgay(DateTimeT2.getText().toString());
+        for (int i = 0; i < arrModel.size(); i++) {
+            Log.e("cv_", "null " + arrModel.get(i).getSoTien());
+        }
 
-        ArrayList<Model_Thongke> list_Chi = new ArrayList<>();
-        list_Chi = helper.getGroupChiNgay(DateTimeT2.getText().toString());
-        Log.e("List Chi size: ", String.valueOf(list_Chi.size()));
-
-        //Put child data to list Group
-        mData.put(lisHeader.get(0), list_Thu);
-        mData.put(lisHeader.get(1), list_Chi);
-
-        ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(getActivity(), lisHeader, mData);
-        ex_menu.setAdapter(adapter);
-
-        ex_menu.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-
-                Log.e(TAG, "onGroupClick: " + groupPosition);
-//                Toast.makeText(getActivity(), "Group click: " + lisHeader.get(groupPosition), LENGTH_LONG).show();
-
-                return false;
-            }
-        });
-
-        ex_menu.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-//                Toast.makeText(getActivity(), "Group Collapse: " + lisHeader.get(groupPosition), LENGTH_LONG).show();
-            }
-        });
-
-        ex_menu.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-//                Toast.makeText(getActivity(), "Group Expandable: " + lisHeader.get(groupPosition), LENGTH_LONG).show();
-            }
-        });
-
-        ex_menu.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//                Toast.makeText(getActivity(), "Item click: " + mData.get(lisHeader.get(groupPosition)).get(childPosition).toString(), LENGTH_LONG).show();
-                return true;
-            }
-        });
+        adapterListTab2 = new AdapterListTab2(getActivity(), R.layout.list_item_tab2, arrModel);
+        lv_group_t2.setAdapter(adapterListTab2);
+        adapterListTab2.updateKhoan(true);
+//        adapterListTab2.notifyDataSetChanged();
     }
 
-    public void initData(){
-        //Data for Group
-        final List<String> lisHeader = new ArrayList<>();
-        lisHeader.add("Tổng Thu");
-        lisHeader.add("Tổng Chi");
+    private void initDataListThu() {
+        arrModel.clear();
+        arrModel = helper.getGroupThu(DateTimeT2.getText().toString());
+        adapterListTab2 = new AdapterListTab2(getActivity(), R.layout.list_item_tab2, arrModel);
+        lv_group_t2.setAdapter(adapterListTab2);
+        adapterListTab2.updateKhoan(false);
+//        adapterListTab2.notifyDataSetChanged();
+    }
 
-        //Data for child
-        mData = new HashMap<>();
-        ArrayList<Model_Thongke> list_Thu = new ArrayList<>();
-        list_Thu = helper.getGroupThu(DateTimeT2.getText().toString());
+    private void initDataListChiDate() {
+        arrModel.clear();
+        arrModel = helper.getGroupChiNgay(DateTimeT2.getText().toString());
+        adapterListTab2 = new AdapterListTab2(getActivity(), R.layout.list_item_tab2, arrModel);
+        lv_group_t2.setAdapter(adapterListTab2);
+        adapterListTab2.updateKhoan(true);
+//        adapterListTab2.notifyDataSetChanged();
+    }
 
-        ArrayList<Model_Thongke> list_Chi = new ArrayList<>();
-        list_Chi = helper.getGroupChi(DateTimeT2.getText().toString());
-        Log.e("List Chi size: ", String.valueOf(list_Chi.size()));
-
-        //Put child data to list Group
-        mData.put(lisHeader.get(0), list_Thu);
-        mData.put(lisHeader.get(1), list_Chi);
-
-        ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(getActivity(), lisHeader, mData);
-        ex_menu.setAdapter(adapter);
-
-        ex_menu.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-
-                Log.e(TAG, "onGroupClick: " + groupPosition);
-//                Toast.makeText(getActivity(), "Group click: " + lisHeader.get(groupPosition), LENGTH_LONG).show();
-
-                return false;
-            }
-        });
-
-        ex_menu.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-//                Toast.makeText(getActivity(), "Group Collapse: " + lisHeader.get(groupPosition), LENGTH_LONG).show();
-            }
-        });
-
-        ex_menu.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-//                Toast.makeText(getActivity(), "Group Expandable: " + lisHeader.get(groupPosition), LENGTH_LONG).show();
-            }
-        });
-
-        ex_menu.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//                Toast.makeText(getActivity(), "Item click: " + mData.get(lisHeader.get(groupPosition)).get(childPosition).toString(), LENGTH_LONG).show();
-                return true;
-            }
-        });
+    private void initDataListThuDate() {
+        arrModel.clear();
+        arrModel = helper.getGroupThuNgay(DateTimeT2.getText().toString());
+        adapterListTab2 = new AdapterListTab2(getActivity(), R.layout.list_item_tab2, arrModel);
+        lv_group_t2.setAdapter(adapterListTab2);
+        adapterListTab2.updateKhoan(false);
+//        adapterListTab2.notifyDataSetChanged();
     }
 
     private void broadcast(){
@@ -349,11 +329,22 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getExtras().getInt("a") == 2){
-                   initData();
+                    initDataListThu();
+                    initDataListChi();
                 }
             }
         };
         // đăng ký
         getActivity().registerReceiver(broadcastReceiver, new IntentFilter("2"));
+    }
+
+    @Override
+    public void onDateSet(com.philliphsu.bottomsheetpickers.date.DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+
+    }
+
+    @Override
+    public void onTimeSet(ViewGroup viewGroup, int hourOfDay, int minute) {
+
     }
 }

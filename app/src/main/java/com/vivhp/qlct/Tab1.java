@@ -279,9 +279,9 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
         } else {
             String sotiennhap = et_amount.getText().toString();
             int sotien_int=Integer.parseInt(sotiennhap.replaceAll("[\\D]", ""));
-
-
             sotien = sotien_int;
+
+
             ngay = tvDateTime.getText().toString();
             lydo = et_description.getText().toString();
             id_tk = Integer.parseInt(temp_idtk);
