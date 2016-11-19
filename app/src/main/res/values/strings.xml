@@ -72,6 +72,12 @@
     <string name="alarm_titl">Nhắc nhở</string>
 
 
+    <!-- Picker -->
+    <string name="alert_dialog_title_month">Select Month</string>
+    <string name="alert_dialog_title_year">Select Year</string>
+    <string name="positive_button_text">Cancel</string>
+    <string name="negative_button_text">Select</string>
+
     <!-- Team Buiding-->
     <string name="designer">Lê Tiến Chung</string>
     <string name="design">Thiết kế</string>

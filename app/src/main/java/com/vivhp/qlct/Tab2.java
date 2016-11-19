@@ -3,6 +3,7 @@ package com.vivhp.qlct;
 import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ import com.vivhp.qlct.Model.Model_Phannhom;
 import com.vivhp.qlct.Model.Model_Thongke;
 import com.vivhp.qlct.adapter.AdapterListTab2;
 import com.vivhp.qlct.adapter.ExpandableListViewAdapter;
+import com.vivhp.qlct.dialog.MonthYearPicker;
+import com.vivhp.qlct.dialog.YearPicker;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.text.DateFormat;
@@ -66,6 +69,8 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
     ArrayAdapter<String> sp_adapter;
     String Dateqr, time_arg;
     AdapterListTab2 adapterListTab2;
+    MonthYearPicker monthYearPicker;
+    YearPicker yearPicker;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -165,27 +170,24 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
     }
 
     public void setMonth(){
-        final Calendar calendar = Calendar.getInstance();
 
         tvSetDateT2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog pickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+                monthYearPicker = new MonthYearPicker(getActivity());
+                monthYearPicker.build(new DialogInterface.OnClickListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String resultDate = year + "/" + (month + 1);
+                    public void onClick(DialogInterface dialog, int which) {
+                        String month = String.valueOf(monthYearPicker.getSelectedMonthShortName());
+                        String year = String.valueOf(monthYearPicker.getSelectedYear());
+                        String resultDate = year + "/" + month;
                         DateTimeT2.setText(resultDate);
                         initDataListThu();
                         initDataListChi();
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                pickerDialog.show();
-//                Calendar now = Calendar.getInstance();
-//                BottomSheetDatePickerDialog date = BottomSheetDatePickerDialog.newInstance(Tab2.this,
-//                        now.get(Calendar.YEAR),
-//                        now.get(Calendar.MONTH),
-//                        now.get(Calendar.DAY_OF_MONTH));
-//                date.show(getFragmentManager(), "date_picker");
+                }, null);
+                showMonthPicker(getView());
             }
         });
     }
@@ -212,16 +214,19 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
         tvSetDateT2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog pickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+                yearPicker = new YearPicker(getActivity());
+                yearPicker.build(new DialogInterface.OnClickListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String resultDate = String.valueOf(year);
+                    public void onClick(DialogInterface dialog, int which) {
+                        String year = String.valueOf(yearPicker.getSelectedYear());
+                        String resultDate = year;
                         DateTimeT2.setText(resultDate);
                         initDataListThu();
                         initDataListChi();
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                pickerDialog.show();
+                }, null);
+                showYearPicker(getView());
             }
         });
     }
@@ -347,5 +352,13 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
     @Override
     public void onTimeSet(ViewGroup viewGroup, int hourOfDay, int minute) {
 
+    }
+
+    public void showMonthPicker(View view) {
+        monthYearPicker.show();
+    }
+
+    public void showYearPicker(View view) {
+        yearPicker.show();
     }
 }
