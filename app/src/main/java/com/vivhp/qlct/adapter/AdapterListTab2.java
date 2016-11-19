@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.vivhp.qlct.HienDoiTien;
 import com.vivhp.qlct.Model.Model_Thongke;
 import com.vivhp.qlct.R;
 
@@ -53,6 +54,7 @@ public class AdapterListTab2 extends ArrayAdapter<Model_Thongke> {
         ImageView icon = (ImageView) convertView.findViewById(R.id.img_item);
         TextView tv_nhom = (TextView) convertView.findViewById(R.id.tv_t2_tennhom);
         TextView tv_money = (TextView) convertView.findViewById(R.id.tv_t2_sotien);
+        tv_money.addTextChangedListener(new HienDoiTien(tv_money));
 
         if (chi)
             icon.setImageResource(R.mipmap.ic_trending_down_black_24dp1);

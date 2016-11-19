@@ -2,8 +2,10 @@ package com.vivhp.qlct;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity
 
     //This is Toolbar
     Toolbar toolbar;
+
+    //Broadcast
+    BroadcastReceiver broadcastReceiver;
 
     //Notification Manager
     PendingIntent pendingIntent;
@@ -97,6 +102,7 @@ public class MainActivity extends AppCompatActivity
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         setupTabIcons();
+        broadcast();
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -148,6 +154,21 @@ public class MainActivity extends AppCompatActivity
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
     }
 
+    private void broadcast() {
+        //Khai bao ve thuc hien lang nghe
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getExtras().getInt("c") == 2) {
+                    viewPager.setCurrentItem(3);
+                }
+            }
+        };
+        // đăng ký
+        getApplicationContext().registerReceiver(broadcastReceiver, new IntentFilter("2"));
+    }
+
+
     class pageAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -196,9 +217,9 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, broadcastAlarmKeyNote.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long time = 28800000;
+        long time = 280000;
         Toast.makeText(this, "Scheduled", Toast.LENGTH_SHORT).show();
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + time, time, pendingIntent);
+//        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + time, time, pendingIntent);
     }
 
 

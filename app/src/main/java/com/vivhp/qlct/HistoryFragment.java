@@ -46,13 +46,6 @@ public class HistoryFragment extends Fragment {
 
         dataBaseHelper = new DataBaseHelper(getActivity());
         lv_history = (ListView) view.findViewById(R.id.lvThongtin);
-
-//        Snackbar snackbar = Snackbar.make(view.getRootView(), ngay, Snackbar.LENGTH_SHORT);
-//        View sbView = snackbar.getView();
-//        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-//        sbView.setBackgroundColor(view.getResources().getColor(R.color.rectage_btn));
-//        textView.setTextColor(view.getResources().getColor(R.color.white));
-//        snackbar.show();
         getThuChi();
 
         return view;

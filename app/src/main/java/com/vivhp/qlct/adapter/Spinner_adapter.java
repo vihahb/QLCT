@@ -24,6 +24,8 @@ public class Spinner_adapter extends ArrayAdapter<Model_Phannhom> {
     ImageView icon_sp;
     ArrayList<Model_Phannhom> list;
 
+    private boolean chi = true;
+
     public Spinner_adapter(Activity context, int resource, ArrayList<Model_Phannhom> list) {
         super(context, resource, list);
         this.context = context;
@@ -50,6 +52,12 @@ public class Spinner_adapter extends ArrayAdapter<Model_Phannhom> {
         tv_id.setText(String.valueOf(list_item.getManhom()));
         tv_id.setVisibility(View.INVISIBLE);
         tv_name.setText(list_item.getTennhom());
+
+        if (chi) {
+            icon_sp.setImageResource(R.mipmap.ic_trending_down_black_24dp1);
+        } else {
+            icon_sp.setImageResource(R.mipmap.ic_trending_up_black_24dp1);
+        }
 
         return row;
     }
@@ -81,6 +89,17 @@ public class Spinner_adapter extends ArrayAdapter<Model_Phannhom> {
         tv_id.setVisibility(View.INVISIBLE);
         tv_name.setText(list_item.getTennhom());
 
+        if (chi) {
+            icon_sp.setImageResource(R.mipmap.ic_trending_down_black_24dp1);
+        } else {
+            icon_sp.setImageResource(R.mipmap.ic_trending_up_black_24dp1);
+        }
+
         return row;
+    }
+
+    public void updateIcon(boolean chi) {
+        this.chi = chi;
+        notifyDataSetChanged();
     }
 }

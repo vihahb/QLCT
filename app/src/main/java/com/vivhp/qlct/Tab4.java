@@ -113,6 +113,9 @@ public class Tab4 extends android.support.v4.app.Fragment {
                 if (intent.getExtras().getInt("a") == 2){
                     new LoadData().execute();
                 }
+                if (intent.getExtras().getInt("c") == 2) {
+                    new LoadData().execute();
+                }
             }
         };
         // đăng ký

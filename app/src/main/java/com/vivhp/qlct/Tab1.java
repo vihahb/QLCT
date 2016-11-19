@@ -37,6 +37,7 @@ import com.vivhp.qlct.Model.Model_Taikhoan;
 import com.vivhp.qlct.Model.Model_Thuchi;
 import com.vivhp.qlct.adapter.Spinner_Tk_Adapter;
 import com.vivhp.qlct.adapter.Spinner_adapter;
+import com.vivhp.qlct.dialog.DialogProgressBar;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -53,30 +54,24 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
 
     BroadcastReceiver broadcastReceiver;
     Model_Phannhom model_phannhom_chi, model_phannhom_thu;
-    String DateTime, getDate;
-    String setDate = "Chọn Ngày";
+    String DateTime;
     EditText et_amount, et_description;
     TextView tvDateTime;
     DataBaseHelper dataBaseHelper;
-    SwitchDateTimeDialogFragment dateTimeDialogFragment;
     View rootView;
     Button btnSave;
-    Snackbar snackbar;
     Spinner spinner_account, spinner_transaction, spinner_group;
     //AppCompatSpinner spinner_status;
     ArrayList<Model_Phannhom> phannhomArrayList;
     ArrayList<Model_Taikhoan> taikhoanArrayList;
     private String[] type_tk = {"Khoản Chi", "Khoản Thu"};
-    //private String[] type_st = {"Đã Trả", "Còn Nợ"};
     TextView tvSetDate;
     String query_type_tk;
     ArrayAdapter<String> Adapter_transaction;
     Spinner_adapter spinnerAdapter;
     Spinner_Tk_Adapter adapter_tk;
-    private int TAG_TIME;
-    String mDate;
 
-    String temp_manhom, temp_ngay, temp_idtk, mes;
+    String temp_manhom, temp_idtk, mes;
     /**
      * Variable for data
      **/
@@ -86,10 +81,13 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
     int id_tk, manhom;
 
     //Tai khoan
-    int tien_tk, id_get_tk, tid_tk;
+    int tien_tk, tid_tk;
 
     //So Tien
     int tien_tk1;
+
+    //DialogProgressbar
+    DialogProgressBar progressBar;
 
     @SuppressLint("WrongViewCast")
     @Nullable
@@ -112,7 +110,6 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
         spinner_account = (Spinner) rootView.findViewById(R.id.spinner_account);
         spinner_transaction = (Spinner) rootView.findViewById(R.id.spinner_transaction);
         spinner_group = (Spinner) rootView.findViewById(R.id.spinner_group);
-        //spinner_status = (AppCompatSpinner) rootView.findViewById(R.id.spinner_status);
         /**
          * Method
          **/
@@ -121,7 +118,6 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
         //Set Spinner
         set_Spinner_account();
         set_Spinner_transaction();
-//        getTienTK_id();
         setBtnSave();
         setForcusAble();
 
@@ -175,62 +171,18 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
     }
 
     public void setDate() {
-
-//        // Initialize
-//        dateTimeDialogFragment = SwitchDateTimeDialogFragment.newInstance(
-//                getString(R.string.label_datetime_dialog),
-//                getString(R.string.positive_button_datetime_picker),
-//                getString(R.string.negative_button_datetime_picker)
-//        );
-
-//        // Assign values we want
-//        dateTimeDialogFragment.setHour(0);
-//        dateTimeDialogFragment.setMinute(0);
-//
-//        dateTimeDialogFragment.setOnButtonClickListener(new SwitchDateTimeDialogFragment.OnButtonClickListener() {
-//            @Override
-//            public void onPositiveButtonClick(Date date) {
-//                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//                String datetime = dateFormat.format(date);
-//
-//                tvDateTime.setText(datetime);
-//                Snackbar snackbar = Snackbar.make(rootView, datetime, Snackbar.LENGTH_SHORT);
-//                View sbView = snackbar.getView();
-//                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-//                sbView.setBackgroundColor(rootView.getResources().getColor(R.color.rectage_btn));
-//                textView.setTextColor(rootView.getResources().getColor(R.color.white));
-//                snackbar.show();
-//                temp_ngay = tvDateTime.getText().toString();
-//            }
-//
-//            @Override
-//            public void onNegativeButtonClick(Date date) {
-//                dateTimeDialogFragment.dismiss();
-//                Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        dateTimeDialogFragment.show(getFragmentManager(), "dialog_date");
-
-//        Calendar calendar = Calendar.getInstance();
-//        BottomSheetDatePickerDialog datePickerDialog = BottomSheetDatePickerDialog.newInstance(Tab1.this,
-//                calendar.get(Calendar.YEAR),
-//                calendar.get(Calendar.MONTH),
-//                calendar.get(Calendar.DAY_OF_MONTH));
-//
-//        datePickerDialog.show(getFragmentManager(), String.valueOf(TAG_TIME));
-
+        Calendar calendar = Calendar.getInstance();
         android.app.DatePickerDialog pickerDialog = new android.app.DatePickerDialog(getActivity(), new android.app.DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 tvDateTime.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
             }
-        }, 2016, 9, 3);
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         pickerDialog.show();
     }
 
     public void getData() {
-
+        progressBar = new DialogProgressBar(getActivity(), false, false, null, getString(R.string.saving));
         /**
          * ThuChi
          * - sotien
@@ -315,25 +267,12 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
             intent.putExtra("a", 2);
             getActivity().sendBroadcast(intent);
 
-
-            //Snackbar Done
-            mes = "Thêm Giao Dịch Thành Công";
-            Snackbar snackbar = Snackbar.make(rootView, mes, Snackbar.LENGTH_SHORT);
-            View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-            sbView.setBackgroundColor(rootView.getResources().getColor(R.color.rectage_btn));
-            textView.setTextColor(rootView.getResources().getColor(R.color.white));
-            snackbar.show();
+            progressBar.showProgressBar();
+            TimeOut(2000);
         }
 
 
     }
-//    //Get tien theo id tai khoan
-//    public void getTienTK_id(){
-//
-//        Log.d("So tien:", String.valueOf(tien_tk));
-//    }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         /**
@@ -358,10 +297,6 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
             loaitc = query_type_tk;
             Toast.makeText(getActivity(), loaitc, Toast.LENGTH_SHORT).show();
         }
-//        if (parent.getId() == R.id.spinner_account){
-//            String txt = String.valueOf(taikhoanArrayList.get(position).getTentk());
-//            Toast.makeText(getActivity(), txt, Toast.LENGTH_SHORT).show();
-//        }
 
         //Spinner nhom
         if (parent.getId() == R.id.spinner_group) {
@@ -428,7 +363,6 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
      **/
     public void set_Spinner_account() {
         //Initialization Adapter to spinner
-//        taikhoanArrayList = new ArrayList<Model_Taikhoan>();
         taikhoanArrayList = dataBaseHelper.getAllTenTaiKhoan();
         Log.d("Size: ", String.valueOf(taikhoanArrayList.size()));
         if (taikhoanArrayList.size() == 0){
@@ -470,7 +404,7 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
         }else {
             spinnerAdapter = new Spinner_adapter(getActivity(), R.layout.spinner_row, phannhomArrayList);
             spinnerAdapter.setDropDownViewResource(R.layout.spinner_row);
-
+            spinnerAdapter.updateIcon(false);
             //Group
             spinner_group.setAdapter(spinnerAdapter);
             spinner_group.getSelectedItemPosition();
@@ -486,47 +420,19 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
         //Adapter Group
         phannhomArrayList = new ArrayList<Model_Phannhom>();
         phannhomArrayList = dataBaseHelper.getTenNhomChi();
-//
-//        for (Model_Phannhom phannhom : taikhoanList){
-//            ma = phannhom.getManhom();
-//            String ten = phannhom.getTennhom();
-//            phannhomArrayList.add(ten);
-//            Log.d("Ma: " + ma, ten);
-//        }
 
         if (phannhomArrayList.size() == 0){
             spinner_group.setVisibility(View.GONE);
         }else {
             spinnerAdapter = new Spinner_adapter(getActivity(), R.layout.spinner_row, phannhomArrayList);
             spinnerAdapter.setDropDownViewResource(R.layout.spinner_row);
+            spinnerAdapter.updateIcon(true);
             //Group
             spinner_group.setAdapter(spinnerAdapter);
             spinner_group.getSelectedItemPosition();
             spinner_group.setOnItemSelectedListener(this);
         }
-
     }
-
-
-    /**
-     * TimeOut
-     **/
-    public int timeOut(int time) {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getActivity(), ActivityHistory.class);
-                startActivity(intent);
-
-            }
-        }, TAG_TIME);
-        return time;
-    }
-
-//    public void getBundle(){
-//        String keycode = getArguments().getString("addComplete");
-//    }
 
     @Override
     public void onResume() {
@@ -568,9 +474,6 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
 
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-//        yyyy/MM/dd
-//        String date = year + "/" + (monthOfYear + 1) + "/" + dayOfMonth;
-//        tvDateTime.setText(date);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Calendar cal = new java.util.GregorianCalendar();
         cal.set(Calendar.YEAR, year);
@@ -584,6 +487,31 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
         Calendar cal = new java.util.GregorianCalendar();
         cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
         cal.set(Calendar.MINUTE, minute);
-//        mText.setText("Time set: " + DateFormat.getTimeFormat(this).format(cal.getTime()));
+    }
+
+    private int TimeOut(int milisecond) {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.hideProgressBar();
+                //Snackbar Done
+                mes = "Thêm Giao Dịch Thành Công";
+                Snackbar snackbar = Snackbar.make(rootView, mes, Snackbar.LENGTH_SHORT);
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                sbView.setBackgroundColor(rootView.getResources().getColor(R.color.rectage_btn));
+                textView.setTextColor(rootView.getResources().getColor(R.color.white));
+                snackbar.show();
+
+                //Get current Date Time
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                Date date = new Date();
+                DateTime = dateFormat.format(date);
+
+                tvDateTime.setText(DateTime);
+            }
+        }, milisecond);
+        return milisecond;
     }
 }

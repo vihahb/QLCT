@@ -13,7 +13,7 @@
     <string name="history">Xem Giao dịch</string>
     <string name="exit">Thoát</string>
     <string name="more">Mở Rộng</string>
-    <string name="action_settings">Cài đặt</string>
+    <string name="action_settings">Thông Tin</string>
 
     <!-- Text title input layout -->
     <string name="account">Tài Khoản</string>
@@ -43,7 +43,13 @@
     <string name="title_activity_history">ActivityHistory</string>
     <string name="title_activity_setting">SettingActivity</string>
 
-
+    <string name="info">Thông tin chung</string>
+    <string name="ver">Phiên bản</string>
+    <string name="ver_number">2.4</string>
+    <string name="langue">Ngôn ngữ</string>
+    <string name="langue_region">Việt Nam</string>
+    <string name="more_info">Thông tin khác</string>
+    <string name="saving">Đang lưu...</string>
     <string name="tienmat">Tiền mặt</string>
     <string name="the">Thẻ Tín Dụng</string>
     <string name="tietkiem">Tiền Tiết Kiệm</string>
@@ -64,4 +70,16 @@
     <string name="set_year">Chọn năm</string>
     <string name="alarm_mes">Hãy thêm các khoản thu chi của bạn!</string>
     <string name="alarm_titl">Nhắc nhở</string>
+
+
+    <!-- Team Buiding-->
+    <string name="designer">Lê Tiến Chung</string>
+    <string name="design">Thiết kế</string>
+    <string name="ui_user">Nguyễn Đức Lam</string>
+    <string name="ui">Giao Diện</string>
+    <string name="logic">Lê Tuấn Thành</string>
+    <string name="logic1">Vũ Hà Vi</string>
+    <string name="logic1_android">Android Logic</string>
+    <string name="coppyright">Copyright © 2016 by Group One</string>
+    <string name="permission">Release 2016.11.18</string>
 </resources>

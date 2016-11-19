@@ -47,8 +47,9 @@ public class broadcastAlarmKeyNote extends BroadcastReceiver {
         // Create Notification using NotificationCompat.Builder
         NotificationCompat.Builder builder = (NotificationCompat.Builder) new NotificationCompat.Builder(
                 context)
+                .setAutoCancel(true)
                 // Set Icon
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 // Set Ticker Message
                 .setTicker(arlmess)
                 // Set Title
@@ -67,5 +68,10 @@ public class broadcastAlarmKeyNote extends BroadcastReceiver {
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         // Build Notification with Notification Manager
         notificationmanager.notify(1, builder.build());
+    }
+
+    private int getNotificationIcon() {
+        boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
+        return useWhiteIcon ? R.mipmap.ic_logo_icon : R.mipmap.ic_logo_icon;
     }
 }

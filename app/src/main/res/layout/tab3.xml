@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/layoutCaidatTop"
-        style="@style/WhiteBackgroundPadding"
+        style="@style/WhiteBackgroundMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -16,7 +16,7 @@
         <Spinner
             android:id="@+id/spinner_group1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_48" />
+            android:layout_height="@dimen/size_36" />
     </LinearLayout>
 
     <ListView

@@ -1,5 +1,6 @@
 package com.vivhp.qlct;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.vivhp.qlct.DBHelper.DataBaseHelper;
 import com.vivhp.qlct.Model.Model_Taikhoan;
+import com.vivhp.qlct.dialog.DialogProgressBar;
 
 import static java.security.AccessController.getContext;
 
@@ -29,6 +31,9 @@ public class AddAccActivity extends AppCompatActivity {
     String result;
     View view;
     Button btnSave;
+    DialogProgressBar progressDialog;
+
+    private boolean tienmat = true;
 
     //Var for Database
     String ten, loai, tien;
@@ -75,6 +80,7 @@ public class AddAccActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), TypeMoney.class);
                 //Khởi tạo Activity chờ nhận dữ liệu
                 startActivityForResult(intent, 1);
+                //Set icon cho button
             }
         });
 
@@ -85,13 +91,6 @@ public class AddAccActivity extends AppCompatActivity {
             }
         });
 
-        //Set icon cho button
-        if (edit_type_money.getText().toString() == "Tiền Mặt") {
-            edit_type_money.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_t05, 0);
-        }
-        if (edit_type_money.getText().toString() == "Thẻ Tín Dụng") {
-            edit_type_money.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_t04, 0);
-        }
     }
 
 
@@ -99,11 +98,22 @@ public class AddAccActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Check request code == 1
-        if (requestCode == 1) {
+        if (resultCode == 1) {
             result = data.getStringExtra("Type");
             //Set title cho button
             edit_type_money.setText(result);
-        }
+            if (edit_type_money.getText().toString().equals("Tiền Mặt")) {
+                checkTien(true);
+            } else
+                checkTien(false);
+
+            if (tienmat) {
+                edit_type_money.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_t05, 0);
+            } else {
+                edit_type_money.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.ic_t04, 0);
+            }
+        } else
+            finish();
     }
 
     public void addTaiKhoan() {
@@ -142,55 +152,64 @@ public class AddAccActivity extends AppCompatActivity {
             String tiennhap = edit_money.getText().toString();
             int sotienint = Integer.parseInt(tiennhap.replaceAll("[\\D]", ""));
             sotien = sotienint;
-            //sotien = Integer.parseInt(tien = edit_money.getText().toString());
-
-
 
             Model_Taikhoan model_taikhoan = new Model_Taikhoan(ten, loai, sotien);
             if (dataBaseHelper.addTaikhoan(model_taikhoan)) {
                 Constants.model_taikhoan = dataBaseHelper.getFinalTenTaiKhoan();
             }
 
-            Snackbar snackbar = Snackbar.make(view, ten + ": " + loai + ": " + sotien, Snackbar.LENGTH_SHORT);
-            View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-            sbView.setBackgroundColor(view.getResources().getColor(R.color.rectage_btn));
-            textView.setTextColor(view.getResources().getColor(R.color.white));
-            snackbar.show();
-
             edit_money.setText(null);
             edit_type_money.setHint(R.string.des_acc);
             edit_name.setText(null);
+            progressDialog = new DialogProgressBar(AddAccActivity.this, false, false, null, getString(R.string.saving));
+            progressDialog.showProgressBar();
 
             timeOut(2000);
 
         }
 
-
     }
 
 
     public int timeOut(int milisecond) {
-        Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                finish();
-//               Bundle bundle = new Bundle();
-//               bundle.putString("addComplete", "ok");
-//                //Set Fragmentclass Arguments
-//                Tab1 tab1 = new Tab1();
-//                tab1.setArguments(bundle);
+                progressDialog.hideProgressBar();
+
+                Snackbar snackbar = Snackbar.make(view, ten + ": " + loai + ": " + sotien, Snackbar.LENGTH_SHORT);
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                sbView.setBackgroundColor(view.getResources().getColor(R.color.rectage_btn));
+                textView.setTextColor(view.getResources().getColor(R.color.white));
+                snackbar.show();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
 
                 //Send Broadcast
                 int reques_int = 1;
                 Intent intent = new Intent("2");
                 intent.putExtra("2", reques_int);
                 intent.putExtra("a", 2);
+
+                int request_int = 2;
+                intent.putExtra("c", request_int);
+
                 getApplicationContext().sendBroadcast(intent);
+
             }
         }, milisecond);
         return milisecond;
+    }
+
+    public void checkTien(boolean tienmat) {
+        this.tienmat = tienmat;
     }
 
 }

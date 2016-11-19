@@ -170,21 +170,22 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
         tvSetDateT2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                DatePickerDialog pickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-//                    @Override
-//                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                        String resultDate = year + "/" + (month+1);
-//                        DateTimeT2.setText(resultDate);
-//                        initData();
-//                    }
-//                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-//                pickerDialog.show();
-                Calendar now = Calendar.getInstance();
-                BottomSheetDatePickerDialog date = BottomSheetDatePickerDialog.newInstance(Tab2.this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH));
-                date.show(getFragmentManager(), "date_picker");
+                DatePickerDialog pickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String resultDate = year + "/" + (month + 1);
+                        DateTimeT2.setText(resultDate);
+                        initDataListThu();
+                        initDataListChi();
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                pickerDialog.show();
+//                Calendar now = Calendar.getInstance();
+//                BottomSheetDatePickerDialog date = BottomSheetDatePickerDialog.newInstance(Tab2.this,
+//                        now.get(Calendar.YEAR),
+//                        now.get(Calendar.MONTH),
+//                        now.get(Calendar.DAY_OF_MONTH));
+//                date.show(getFragmentManager(), "date_picker");
             }
         });
     }

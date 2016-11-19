@@ -7,22 +7,23 @@
     android:background="#eee"
     android:id="@+id/card_view"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    card_view:cardCornerRadius="5dp"
+    card_view:cardCornerRadius="@dimen/siza_5"
     tools:context=".Tab1">
 <!-- ripple-->
     <LinearLayout
-        style="@style/WhiteBackgroundPadding"
+        style="@style/WhiteBackgroundPadding_tab_4"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
        <ImageView
            android:id="@+id/img_total"
-           android:src="@mipmap/ic_t04"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content" />
+           android:layout_marginLeft="@dimen/siza_5"
+           android:src="@mipmap/ic_tien_total"
+           android:layout_width="@dimen/size_48"
+           android:layout_height="@dimen/size_48" />
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center_vertical"
             android:id="@+id/name_total"
             android:textColor="@color/colorPrimary"
             android:text="Tổng Số Tiền: "
@@ -42,11 +43,11 @@
         android:layout_weight="1" />
 
         <TextView
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
            android:id="@+id/tv_total"
            android:text="Số Tiền"
-           android:textColor="@color/colorPrimary"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/red"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"/>
         <View
@@ -59,8 +60,8 @@
 
     <android.support.v7.widget.RecyclerView
        android:id="@+id/lv_taikhoan"
-       android:layout_marginLeft="5dp"
-       android:layout_marginRight="5dp"
+        android:layout_marginLeft="@dimen/siza_5"
+        android:layout_marginRight="@dimen/siza_5"
        android:layout_width="match_parent"
        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vivhp.qlct.HienDoiTien;
 import com.vivhp.qlct.Model.ModelHistory;
 import com.vivhp.qlct.R;
 
@@ -27,6 +28,7 @@ public class AdapterHistoryItem extends ArrayAdapter<ModelHistory> {
     int LayoutId;
     ArrayList<ModelHistory> arrayList;
     TextView txtTenKhoan, txtSotien, txtLydo, txtTenTK, txtTenNhom;
+    private boolean chi = false;
     public AdapterHistoryItem(Activity context, int resource, ArrayList<ModelHistory> arrayList) {
         super(context, resource, arrayList);
         this.context = context;
@@ -48,6 +50,7 @@ public class AdapterHistoryItem extends ArrayAdapter<ModelHistory> {
                 txtTenNhom = (TextView) convertView.findViewById(R.id.txtTennhom);
                 txtTenKhoan = (TextView) convertView.findViewById(R.id.txtTenKhoan);
                 txtSotien = (TextView) convertView.findViewById(R.id.txtMoney);
+                txtSotien.addTextChangedListener(new HienDoiTien(txtSotien));
                 txtLydo = (TextView) convertView.findViewById(R.id.txtLydo);
                 txtTenTK = (TextView) convertView.findViewById(R.id.txtTenTK);
 
@@ -58,10 +61,21 @@ public class AdapterHistoryItem extends ArrayAdapter<ModelHistory> {
                 txtLydo.setText(history.getLydo());
                 txtTenTK.setText(history.getTentk());
                 /**
-                 * Check xem trạng thái đã trả hay còn nợ để đổi màu cho textView
-                 * Đã trả: màu xanh
-                 * Còn nợ: màu đỏ
+                 * Check xem trạng thái chi hay thu để đổi màu cho textView
+                 * Thu: màu xanh
+                 * Chi nợ: màu đỏ
                  **/
+
+                if (txtTenKhoan.getText().toString().equals("Khoản Chi")) {
+                    chi = true;
+                } else
+                    chi = false;
+
+                if (chi) {
+                    txtTenKhoan.setTextColor(convertView.getResources().getColor(R.color.color_chi));
+                } else
+                    txtTenKhoan.setTextColor(convertView.getResources().getColor(R.color.colorPrimary));
+
 
             } else {
             }

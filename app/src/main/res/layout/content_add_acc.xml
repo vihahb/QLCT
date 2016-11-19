@@ -12,6 +12,7 @@
     tools:showIn="@layout/activity_add_acc">
 
         <EditText
+            android:paddingLeft="@dimen/siza_5"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             style="@style/WhiteBackground"
@@ -23,6 +24,7 @@
 
         <EditText
             android:focusable="false"
+            android:paddingLeft="@dimen/siza_5"
             android:focusableInTouchMode="false"
             android:gravity="center_vertical|left"
             android:layout_marginTop="2dp"
@@ -39,6 +41,7 @@
 
         <EditText
             android:layout_marginTop="10dp"
+            android:paddingLeft="@dimen/siza_5"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             style="@style/WhiteBackground"

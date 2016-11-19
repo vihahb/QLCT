@@ -20,11 +20,11 @@ public class TypeMoney extends AppCompatActivity {
     ArrayList<Model_List_Type_Money> arrayList;
     String type_txt;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_money);
+
 
         final ListView lv_type = (ListView) findViewById(R.id.lv_type_money);
 
@@ -61,7 +61,8 @@ public class TypeMoney extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(this, AddAccActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, AddAccActivity.class);
+//        startActivity(intent);
+        finish();
     }
 }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vivhp.qlct.DBHelper.DataBaseHelper;
+import com.vivhp.qlct.HienDoiTien;
 import com.vivhp.qlct.Model.Model_Taikhoan;
 import com.vivhp.qlct.R;
 
@@ -23,6 +24,7 @@ public class RecycleViewAdapterTaiKhoan extends RecyclerView.Adapter<RecycleView
     ImageView img_tk;
     //Khai báo arrayList Kiểu Model Tài Khoản
     ArrayList<Model_Taikhoan> arrayList;
+    public boolean tienmat = true;
 
     /**
      * Bắt buộc phải tạo 1 class kê thừa ViewHolder
@@ -120,6 +122,15 @@ public class RecycleViewAdapterTaiKhoan extends RecyclerView.Adapter<RecycleView
         holder.money.setText(String.valueOf(taikhoan.getSotien()));
         holder.img_tk.setImageResource(R.mipmap.ic_t07);
 
+        if (holder.type.getText().toString().equals("Tiền Mặt")) {
+            tienmat = true;
+        } else
+            tienmat = false;
+
+        if (tienmat) {
+            holder.img_tk.setImageResource(R.mipmap.ic_t05);
+        } else
+            holder.img_tk.setImageResource(R.mipmap.ic_t04);
     }
 
 
@@ -149,5 +160,4 @@ public class RecycleViewAdapterTaiKhoan extends RecyclerView.Adapter<RecycleView
         notifyDataSetChanged();
     }
 
-//    private View.OnClickListener onClickListener = new
 }

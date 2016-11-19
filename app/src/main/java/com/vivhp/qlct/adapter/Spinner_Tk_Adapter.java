@@ -24,6 +24,7 @@ public class Spinner_Tk_Adapter extends ArrayAdapter<Model_Taikhoan> {
     int LayoutId;
     ImageView img_icon;
     ArrayList<Model_Taikhoan> arrayList;
+    private boolean tienmat = true;
 
     public Spinner_Tk_Adapter(Activity context, int resource, ArrayList<Model_Taikhoan> list) {
         super(context, resource, list);
@@ -63,8 +64,20 @@ public class Spinner_Tk_Adapter extends ArrayAdapter<Model_Taikhoan> {
         tvname.setText(taikhoanList1.getTentk());
         tvtype.setText(taikhoanList1.getLoaihinh());
         tvtype.setVisibility(View.INVISIBLE);
+        tvtype.setText(arrayList.get(position).getLoaihinh().toString());
+
+        if (tvtype.getText().toString().equals("Tiền Mặt")) {
+            tienmat = true;
+        } else
+            tienmat = false;
+
         //Set icon cho spinner khi dropDown
-        img_icon.setImageResource(R.mipmap.ic_t07);
+
+        if (tienmat)
+            img_icon.setImageResource(R.mipmap.ic_t05);
+        else
+            img_icon.setImageResource(R.mipmap.ic_t04);
+
 
         return rootView;
     }
@@ -113,9 +126,8 @@ public class Spinner_Tk_Adapter extends ArrayAdapter<Model_Taikhoan> {
     }
 
 
-    public void updateData(ArrayList<Model_Taikhoan> arrayList){
-        this.arrayList.clear();
-        this.arrayList.addAll(arrayList);
+    public void updateIcon(boolean tienmat) {
+        this.tienmat = tienmat;
         notifyDataSetChanged();
     }
 }

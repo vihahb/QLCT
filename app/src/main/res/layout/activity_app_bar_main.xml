@@ -14,6 +14,7 @@
         android:layout_height="match_parent">
         //appbar layout
         <android.support.design.widget.AppBarLayout
+            android:elevation="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
@@ -40,6 +41,7 @@
 
         <!-- View pager to swipe views -->
         <android.support.v4.view.ViewPager
+            android:elevation="0dp"
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

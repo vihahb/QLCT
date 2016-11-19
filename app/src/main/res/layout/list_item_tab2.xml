@@ -16,18 +16,19 @@
     <TextView
         style="@style/TextViewLabel_list_Start"
         android:paddingLeft="20dp"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:layout_marginTop="15dp"
         android:id="@+id/tv_t2_tennhom"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/group" />
 
     <TextView
+        android:layout_weight="1"
         style="@style/TextViewLabel_list_End"
         android:id="@+id/tv_t2_sotien"
         android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/amount" />
 </LinearLayout>
