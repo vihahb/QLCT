@@ -72,6 +72,9 @@ public class Tab4 extends android.support.v4.app.Fragment {
 
         //TV Total Money
         tvTotalMoney = (TextView) view.findViewById(R.id.tv_total);
+        //Hien so doi tien
+        tvTotalMoney.addTextChangedListener(new HienDoiTien(tvTotalMoney));
+
 
         initSumMoney();
         initRecyclerview(view);

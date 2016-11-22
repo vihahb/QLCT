@@ -13,11 +13,13 @@ import java.util.StringTokenizer;
 
 public class HienDoiTien implements TextWatcher {
 
-    TextView textText;
+    TextView textView;
 
 
-    public HienDoiTien(TextView textText) {
-        this.textText = textText;
+    public HienDoiTien (TextView textView) {
+        this.textView = textView;
+
+
     }
 
     @Override
@@ -33,30 +35,31 @@ public class HienDoiTien implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
         try {
-            textText.removeTextChangedListener(this);
-            String value = textText.getText().toString();
+            textView.removeTextChangedListener(this);
+            String value = textView.getText().toString();
 
 
             if (value != null && !value.equals("")) {
 
                 if (value.startsWith(".")) {
-                    textText.setText("0.");
+                    textView.setText("0.");
                 }
                 if (value.startsWith("0") && !value.startsWith("0.")) {
-                    textText.setText("");
+                    textView.setText("");
 
                 }
 
 
-                String str = textText.getText().toString().replaceAll("\\.", "");
+                String str = textView.getText().toString().replaceAll("\\.", "");
                 if (!value.equals(""))
-                    textText.setText(getDecimalFormattedString(str));
-                textText.setText(textText.getText().toString().length());
+                    textView.setText(getDecimalFormattedString(str));
+                textView.setText(textView.getText().toString().length());
             }
-            textText.addTextChangedListener(this);
+            textView.addTextChangedListener(this);
             return;
         } catch (Exception ex) {
             ex.printStackTrace();
+            textView.addTextChangedListener(this);
         }
 
     }
@@ -93,7 +96,7 @@ public class HienDoiTien implements TextWatcher {
     }
 
     public static String trimCommaOfString(String string) {
-//        String returnString; TextView
+//        String returnString;
         if (string.contains(",")) {
             return string.replace(",", "");
         } else {
