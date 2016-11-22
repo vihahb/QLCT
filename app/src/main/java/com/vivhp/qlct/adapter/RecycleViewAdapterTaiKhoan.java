@@ -47,7 +47,12 @@ public class RecycleViewAdapterTaiKhoan extends RecyclerView.Adapter<RecycleView
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.tv_name);
             type = (TextView) itemView.findViewById(R.id.tv_type);
+
+            //Lam sua so tien
             money = (TextView) itemView.findViewById(R.id.tv_money);
+            //Hien so doi tien
+            money.addTextChangedListener(new HienDoiTien(money));
+
             img_tk = (ImageView) itemView.findViewById(R.id.img_tk);
 
             /**
