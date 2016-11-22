@@ -141,6 +141,12 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
 //                    spinnerAdapter.notifyDataSetChanged();
                     Constants.model_phannhom_chi = null;
                 }
+                if (intent.getExtras().getInt("b") == 3) {
+                    receiverIntentChi();
+                }
+                if (intent.getExtras().getInt("b") == 4) {
+                    receiverIntentThu();
+                }
             }
         };
         // đăng ký
@@ -307,13 +313,13 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
 //            txt += "Cách 1: " + phannhomArrayList.get(position).getManhom();
 ////            or
 //            txt += ";  Cách 2: " +  + phannhomArrayList.get(spinner_group.getSelectedItemPosition()).getManhom();
-            Toast.makeText(getContext(), temp_manhom, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), temp_manhom, Toast.LENGTH_SHORT).show();
         }
         //Spinner Tai khoan
         if (parent.getId() == R.id.spinner_account) {
             tid_tk = taikhoanArrayList.get(position).get_id();
             temp_idtk = String.valueOf(taikhoanArrayList.get(position).get_id());
-            Toast.makeText(getContext(), temp_idtk, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), temp_idtk, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -432,6 +438,16 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
             spinner_group.getSelectedItemPosition();
             spinner_group.setOnItemSelectedListener(this);
         }
+    }
+
+    public void receiverIntentChi() {
+        phannhomArrayList.clear();
+        setSpinnerChi();
+    }
+
+    public void receiverIntentThu() {
+        phannhomArrayList.clear();
+        setSpinnerThu();
     }
 
     @Override

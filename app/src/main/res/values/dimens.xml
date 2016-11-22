@@ -15,7 +15,10 @@
     <dimen name="siza_10">10dp</dimen>
     <dimen name="siza_16">16dp</dimen>
     <dimen name="siza_24">24dp</dimen>
+    <dimen name="siza_2">2dp</dimen>
+    <dimen name="size_4">4dp</dimen>
     <dimen name="siza_5">5dp</dimen>
+    <dimen name="siza_6">6dp</dimen>
     <dimen name="size_16">16dp</dimen>
     <dimen name="size_20">20dp</dimen>
 

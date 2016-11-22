@@ -377,6 +377,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //        database.close();
     }
 
+    public void updateNhom(int id, String nhom, String khoan) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        values = new ContentValues();
+        values.put(COLUMN_PHANNHOM_TENNHOM, nhom);
+        values.put(COLUMN_PHANNHOM_TENKHOAN, khoan);
+        database.update(TABLE_PHANNHOM, values, " manhom =? ", new String[]{String.valueOf(id)});
+    }
+
     /**
      * Done
      **/

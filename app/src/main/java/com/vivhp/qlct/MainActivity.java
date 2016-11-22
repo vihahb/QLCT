@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        initNotification();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -168,7 +166,6 @@ public class MainActivity extends AppCompatActivity
         getApplicationContext().registerReceiver(broadcastReceiver, new IntentFilter("2"));
     }
 
-
     class pageAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -212,15 +209,15 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    //initNotification
-    public void initNotification(){
-        Intent intent = new Intent(this, broadcastAlarmKeyNote.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long time = 280000;
-        Toast.makeText(this, "Scheduled", Toast.LENGTH_SHORT).show();
-//        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + time, time, pendingIntent);
-    }
+//    //initNotification
+//    public void initNotification(){
+//        Intent intent = new Intent(this, broadcastAlarmKeyNote.class);
+//        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        long time = 280000;
+////        Toast.makeText(this, "Scheduled", Toast.LENGTH_SHORT).show();
+////        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + time, time, pendingIntent);
+//    }
 
 
     @Override

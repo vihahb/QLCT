@@ -3,6 +3,7 @@ package com.vivhp.qlct;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +27,7 @@ import com.vivhp.qlct.DBHelper.DataBaseHelper;
 import com.vivhp.qlct.Model.Model_Phannhom;
 import com.vivhp.qlct.Model.Model_Taikhoan;
 import com.vivhp.qlct.adapter.List_Phannhom_Adapter;
+import com.vivhp.qlct.dialog.DialogProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +50,11 @@ public class Tab3 extends android.support.v4.app.Fragment implements AdapterView
     ListView lvGroup;
     Spinner spinner_group1;
     ImageButton btnAdd;
+    DialogProgressBar progressBar;
     int intBoolean;
+    int value_receiver;
+    int manhom;
+    String tennhom_dialog;
     private String[] loaik = {"Khoản Chi", "Khoản Thu"};
     private String[] query = {"Tất cả", "Khoản Chi", "Khoản Thu"};
 
@@ -84,8 +92,9 @@ public class Tab3 extends android.support.v4.app.Fragment implements AdapterView
 
         //ImageButton Click
         imgBtnCliked();
+        updateNhom();
 
-        deleteGroup();
+//        deleteGroup();
         return rootView;
     }
 
@@ -222,6 +231,17 @@ public class Tab3 extends android.support.v4.app.Fragment implements AdapterView
         });
     }
 
+    public void updateNhom() {
+        lvGroup.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                manhom = phannhomArrayList.get(position).getManhom();
+                tennhom_dialog = phannhomArrayList.get(position).getTennhom();
+                showDialog();
+                return false;
+            }
+        });
+    }
 
     /**
      * Hàm không khai báo trong onCreateView
@@ -380,57 +400,81 @@ public class Tab3 extends android.support.v4.app.Fragment implements AdapterView
     }
 
     /**
-     * Sự kiện Xóa nhóm theo Mã Nhóm
+     * Sự kiện Sửa nhóm theo Mã Nhóm
      **/
-    public void deleteGroup() {
-        lvGroup.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final int item_remove = phannhomArrayList.get(position).getManhom();
-                String ten_remove = phannhomArrayList.get(position).getTennhom();
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Xóa nhóm: " + ten_remove);
-                builder.setMessage("Bạn có muốn xóa nhóm này?" + "\n" + "Xóa nhóm này có thể xóa kèm các dữ liệu giao sử dụng nhóm này.");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dataBaseHelper.deleteNhom(new Model_Phannhom(item_remove));
-                        setListView();
-                        deleteGroupSucc();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
 
-                return true;
+    public void showDialog() {
+        LayoutInflater layoutInflater = getLayoutInflater(getArguments());
+        View alertLayout = layoutInflater.inflate(R.layout.custom_dialog, null);
+        final RadioButton rdo_chi = (RadioButton) alertLayout.findViewById(R.id.radio_chi);
+        final RadioButton rdo_thu = (RadioButton) alertLayout.findViewById(R.id.radio_thu);
+        final RadioGroup radioGroup = (RadioGroup) alertLayout.findViewById(R.id.radio_group);
+        final EditText edt_nhom = (EditText) alertLayout.findViewById(R.id.edt_nhom);
+        edt_nhom.setText(tennhom_dialog);
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setView(alertLayout);
+        dialog.setCancelable(false);
+        dialog.setTitle("Cập nhật nhóm");
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), "Hủy bỏ cập nhật!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    /**
-     * Sự kiện xóa Nhóm thành công
-     **/
-    public void deleteGroupSucc() {
-        snackbar = Snackbar.make(rootView, "Nhóm đã bị xóa!", Snackbar.LENGTH_LONG);
-
-        snackbar.setAction(R.string.done, new View.OnClickListener() {
+        dialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                snackbar.dismiss();
+            public void onClick(DialogInterface dialog, int which) {
+                progressBar = new DialogProgressBar(getContext(), false, false, null, getString(R.string.saving));
+                progressBar.showProgressBar();
+                final String st_khoan, st_nhom;
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                if (selectedId == R.id.radio_chi) {
+                    st_khoan = rdo_chi.getText().toString();
+                    value_receiver = 1;
+//                    Toast.makeText(getActivity(), "Ten khoản: " + st_khoan, Toast.LENGTH_SHORT).show();
+                } else {
+                    st_khoan = rdo_thu.getText().toString();
+                    value_receiver = 2;
+//                    Toast.makeText(getActivity(), "Ten khoản: " + st_khoan, Toast.LENGTH_SHORT).show();
+                }
+                st_nhom = edt_nhom.getText().toString();
+
+                if (st_nhom != null && st_khoan != null) {
+                    updateData(st_khoan, st_nhom);
+                } else {
+                    Toast.makeText(getActivity(), "Ten nhóm: " + st_nhom + ", ten khoan: " + st_khoan, Toast.LENGTH_SHORT).show();
+                }
 
             }
-        }).setActionTextColor(rootView.getResources().getColor(R.color.colorAccent)).setDuration(3000);
-        View sbView = snackbar.getView();
-        sbView.setBackgroundColor(rootView.getResources().getColor(R.color.rectage_btn));
-        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(rootView.getResources().getColor(R.color.white));
-        snackbar.show();
-    }
 
+            private void updateData(final String st_khoan, final String st_nhom) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dataBaseHelper.updateNhom(manhom, st_nhom, st_khoan);
+                        progressBar.hideProgressBar();
+                        Toast.makeText(getActivity(), "Đã cập nhật!", Toast.LENGTH_SHORT).show();
+                        setListView();
+                        if (value_receiver == 1) {
+                            Intent intent = new Intent("2");
+//                        intent.putExtra("p", "");
+                            intent.putExtra("b", 3);
+                            getActivity().sendBroadcast(intent);
+                        }
+                        if (value_receiver == 2) {
+                            Intent intent = new Intent("2");
+//                        intent.putExtra("p", "");
+                            intent.putExtra("b", 4);
+                            getActivity().sendBroadcast(intent);
+                        }
+                    }
+                }, 2000);
+            }
+        });
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+    }
 
 }

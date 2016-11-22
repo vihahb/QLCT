@@ -70,6 +70,9 @@
     <string name="set_year">Chọn năm</string>
     <string name="alarm_mes">Hãy thêm các khoản thu chi của bạn!</string>
     <string name="alarm_titl">Nhắc nhở</string>
+    <string name="ten_nhom">Tên nhóm</string>
+    <string name="thu">Khoản Thu</string>
+    <string name="chi">Khoản Chi</string>
 
 
     <!-- Picker -->

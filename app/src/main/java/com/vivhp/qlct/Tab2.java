@@ -338,6 +338,14 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
                     initDataListThu();
                     initDataListChi();
                 }
+                if (intent.getExtras().getInt("b") == 3) {
+                    initDataListChi();
+                    Toast.makeText(context, "Lọc: " + btn_chi.getText().toString(), Toast.LENGTH_SHORT).show();
+                }
+                if (intent.getExtras().getInt("b") == 4) {
+                    initDataListThu();
+                    Toast.makeText(context, "Lọc: " + btn_thu.getText().toString(), Toast.LENGTH_SHORT).show();
+                }
             }
         };
         // đăng ký
