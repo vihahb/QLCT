@@ -49,7 +49,7 @@ public class HienDoiTien implements TextWatcher {
 
                 }
 
-
+                // String str = textView.getText().toString().replaceAll("[\\D]", "");
                 String str = textView.getText().toString().replaceAll("\\.", "");
                 if (!value.equals(""))
                     textView.setText(getDecimalFormattedString(str));
@@ -90,6 +90,8 @@ public class HienDoiTien implements TextWatcher {
                 i = 0;
             }
             str3 = str1.charAt(k) + str3;
+            str3 = str3.replace("-.", "-");
+
             i++;
         }
 
@@ -98,9 +100,20 @@ public class HienDoiTien implements TextWatcher {
     public static String trimCommaOfString(String string) {
 //        String returnString;
         if (string.contains(",")) {
+
+            string = string.replace("-.", "-");
             return string.replace(",", "");
+
+            //return string.replace("-.", "-");
         } else {
-            return string;
+            return string.replace("-.", "-");
+
+
+            //string = string.replace("-.", "-");
+            //return string.replace("-.", "-");
+            //return string;
+
+
         }
 
     }
