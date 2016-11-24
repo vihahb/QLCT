@@ -62,8 +62,9 @@ public class RecycleViewAdapterTaiKhoan extends RecyclerView.Adapter<RecycleView
             name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String mes = "Tài khoản: ";
                     txt = name.getText().toString();
-                    Snackbar snackbar = Snackbar.make(itemView, txt, Snackbar.LENGTH_SHORT);
+                    Snackbar snackbar = Snackbar.make(itemView, mes + txt, Snackbar.LENGTH_SHORT);
                     View sbView = snackbar.getView();
                     TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
                     sbView.setBackgroundColor(itemView.getResources().getColor(R.color.rectage_btn));
@@ -75,8 +76,9 @@ public class RecycleViewAdapterTaiKhoan extends RecyclerView.Adapter<RecycleView
             type.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String mes = "Loại tiền: ";
                     txt = type.getText().toString();
-                    Snackbar snackbar = Snackbar.make(itemView, txt, Snackbar.LENGTH_SHORT);
+                    Snackbar snackbar = Snackbar.make(itemView, mes + txt, Snackbar.LENGTH_SHORT);
                     View sbView = snackbar.getView();
                     TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
                     sbView.setBackgroundColor(itemView.getResources().getColor(R.color.rectage_btn));
@@ -88,8 +90,9 @@ public class RecycleViewAdapterTaiKhoan extends RecyclerView.Adapter<RecycleView
             money.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String mes = "Số dư: ";
                     txt = money.getText().toString();
-                    Snackbar snackbar = Snackbar.make(itemView, txt, Snackbar.LENGTH_SHORT);
+                    Snackbar snackbar = Snackbar.make(itemView, mes + txt, Snackbar.LENGTH_SHORT);
                     View sbView = snackbar.getView();
                     TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
                     sbView.setBackgroundColor(itemView.getResources().getColor(R.color.rectage_btn));

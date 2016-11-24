@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/WhiteBackgroundCard"
-    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardBackgroundColor="@color/color_card"
     card_view:cardCornerRadius="1dp"
     card_view:cardUseCompatPadding="false">
 
@@ -54,7 +54,7 @@
                 android:id="@+id/tv_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:textSize="15sp"
                 android:text="@string/des_acc"
                 android:textColor="@color/Gray"/>
@@ -64,19 +64,18 @@
             android:gravity="right"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
-
-
-
+            android:layout_marginRight="@dimen/siza_6"
+            android:layout_height="match_parent">
             <TextView
                 android:layout_marginTop="10dp"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:id="@+id/tv_money"
+                android:gravity="right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingStart="26dp"
                 android:text="@string/amount"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/color_red" />
         </LinearLayout>
 
 

@@ -10,6 +10,7 @@
     <dimen name="mb_height_56">56dp</dimen>
     <dimen name="margin_text_list_item_start">5dp</dimen>
     <dimen name="size_48">48dp</dimen>
+    <dimen name="size_40">40dp</dimen>
     <dimen name="size_72">72dp</dimen>
     <dimen name="size_36">36dp</dimen>
     <dimen name="size_9">9dp</dimen>

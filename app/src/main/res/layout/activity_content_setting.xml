@@ -9,12 +9,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.vivhp.qlct.SettingActivity"
     tools:showIn="@layout/activity_setting">
-    <TextView
-        android:id="@+id/line0"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_37718E" />
-
     <LinearLayout
         android:paddingLeft="@dimen/siza_24"
         android:id="@+id/lnInfo"
@@ -29,7 +23,7 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/Gray"
+            android:textColor="@color/colorChiClicked"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/ver" />
@@ -39,7 +33,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/Gray"
+            android:textColor="@color/rectage_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/ver_number" />
@@ -67,7 +61,7 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/Gray"
+            android:textColor="@color/colorChiClicked"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/langue" />
@@ -77,7 +71,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/Gray"
+            android:textColor="@color/rectage_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/langue_region" />
@@ -87,14 +81,13 @@
     <LinearLayout
         android:paddingLeft="@dimen/size_16"
         android:id="@+id/lnTitleTeam"
-        android:background="@color/colorPrimary"
+        android:background="@color/child_hb"
         android:layout_below="@+id/lnLanguage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36">
 
         <TextView
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/siza_10"
+            android:gravity="center_horizontal|center_vertical"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_width="match_parent"
@@ -116,7 +109,7 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/group_chi"
+            android:textColor="@color/child_hb"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/designer" />
@@ -126,7 +119,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/group_thu"
+            android:textColor="@color/rectage_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/design" />
@@ -147,7 +140,7 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/group_chi"
+            android:textColor="@color/child_hb"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/ui_user" />
@@ -157,7 +150,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/group_thu"
+            android:textColor="@color/rectage_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/ui" />
@@ -178,7 +171,7 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/group_chi"
+            android:textColor="@color/child_hb"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/logic" />
@@ -188,7 +181,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/group_thu"
+            android:textColor="@color/rectage_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/logic1_android" />
@@ -209,7 +202,7 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/group_chi"
+            android:textColor="@color/child_hb"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/logic1" />
@@ -219,7 +212,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/group_thu"
+            android:textColor="@color/rectage_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/logic1_android" />
@@ -252,15 +245,13 @@
     <LinearLayout
         android:paddingLeft="@dimen/size_16"
         android:id="@+id/lnTitleInfo"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorChiClicked"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36"
-        android:layout_below="@+id/line0"
         android:layout_alignParentStart="true">
 
         <TextView
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/siza_10"
+            android:gravity="center_horizontal|center_vertical"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_width="match_parent"

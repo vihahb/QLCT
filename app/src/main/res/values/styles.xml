@@ -68,11 +68,12 @@
         <item name="android:background">#FFFF</item>
         <item name="android:textSize">14sp</item>
         <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginLeft">9dp</item>
+        <item name="android:layout_marginRight">9dp</item>
     </style>
     <style name="WhiteBackgroundCard">
         <item name="android:background">#FFFF</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:layout_margin">1dp</item>
     </style>
 
     <style name="WhiteBackgroundDate">

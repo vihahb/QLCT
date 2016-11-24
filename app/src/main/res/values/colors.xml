@@ -10,6 +10,7 @@
     <color name="colorTabSelected">#fff</color>
     <color name="Gray">#e5787474</color>
     <color name="Gray_eee">#eeeeee</color>
+    <color name="color_card">#FFFF</color>
 
     <!-- Button -->
     <color name="rectage_btn">#2196f3</color>

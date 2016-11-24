@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="Tổng Số Tiền: "
+            android:text="Tổng Số Dư: "
             android:textColor="@color/colorPrimary" />
 
         <View
@@ -51,24 +51,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="@dimen/size_9"
             android:text="Số Tiền"
             android:textColor="@color/color_red" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lv_taikhoan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/siza_5"
-        app:elevation="0dp"></android.support.v7.widget.RecyclerView>
+        card_view:elevation="0dp"></android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>
