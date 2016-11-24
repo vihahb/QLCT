@@ -5,8 +5,9 @@
 
     <ImageView
         android:id="@+id/icon_type_money"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/size_48"
+        android:layout_height="@dimen/size_48"
+        android:scaleType="fitCenter"
         android:src="@mipmap/ic_t05"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />

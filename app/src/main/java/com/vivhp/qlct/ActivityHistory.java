@@ -24,7 +24,6 @@ import java.util.Comparator;
 
 public class ActivityHistory extends AppCompatActivity {
 
-    ImageButton btnThem;
     ViewPager viewPager;
     ArrayList<String> arr;
     AdapterHistory adapterHistory;
@@ -43,17 +42,6 @@ public class ActivityHistory extends AppCompatActivity {
         dataBaseHelper = new DataBaseHelper(this);
 
         setViewPager();
-
-        //Tao Image Button them tren ToolBar
-        btnThem = (ImageButton) findViewById(R.id.btnThongtinThem);
-        btnThem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
         toolbar.setNavigationIcon(getResources().getDrawable(R.mipmap.ic_arrow_back_white_24dp));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

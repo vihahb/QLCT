@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,41 +16,28 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.philliphsu.bottomsheetpickers.date.BottomSheetDatePickerDialog;
-import com.philliphsu.bottomsheetpickers.time.BottomSheetTimePickerDialog;
 import com.vivhp.qlct.DBHelper.DataBaseHelper;
-import com.vivhp.qlct.Model.Model_Phannhom;
 import com.vivhp.qlct.Model.Model_Thongke;
 import com.vivhp.qlct.adapter.AdapterListTab2;
-import com.vivhp.qlct.adapter.ExpandableListViewAdapter;
 import com.vivhp.qlct.dialog.MonthYearPicker;
 import com.vivhp.qlct.dialog.YearPicker;
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import static android.widget.Toast.LENGTH_LONG;
-import static com.vivhp.qlct.R.id.DateTime;
 
 /**
  * Created by vivhp on 10/16/2016.
  */
 
-public class Tab2 extends android.support.v4.app.Fragment implements AdapterView.OnItemSelectedListener,
-        com.philliphsu.bottomsheetpickers.date.BottomSheetDatePickerDialog.OnDateSetListener,
-        BottomSheetTimePickerDialog.OnTimeSetListener {
+public class Tab2 extends android.support.v4.app.Fragment implements AdapterView.OnItemSelectedListener{
 
     View rootView;
 
@@ -350,16 +335,6 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
         };
         // đăng ký
         getActivity().registerReceiver(broadcastReceiver, new IntentFilter("2"));
-    }
-
-    @Override
-    public void onDateSet(com.philliphsu.bottomsheetpickers.date.DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-
-    }
-
-    @Override
-    public void onTimeSet(ViewGroup viewGroup, int hourOfDay, int minute) {
-
     }
 
     public void showMonthPicker(View view) {

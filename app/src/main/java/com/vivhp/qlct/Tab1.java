@@ -26,11 +26,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
-import com.philliphsu.bottomsheetpickers.date.BottomSheetDatePickerDialog;
-import com.philliphsu.bottomsheetpickers.date.DatePickerController;
-import com.philliphsu.bottomsheetpickers.date.DatePickerDialog;
-import com.philliphsu.bottomsheetpickers.time.BottomSheetTimePickerDialog;
 import com.vivhp.qlct.DBHelper.DataBaseHelper;
 import com.vivhp.qlct.Model.Model_Phannhom;
 import com.vivhp.qlct.Model.Model_Taikhoan;
@@ -50,7 +45,7 @@ import java.util.Date;
  * by vivhp on 10/16/2016.
  */
 
-public class Tab1 extends android.support.v4.app.Fragment implements AdapterView.OnItemSelectedListener, com.philliphsu.bottomsheetpickers.date.DatePickerDialog.OnDateSetListener, BottomSheetTimePickerDialog.OnTimeSetListener {
+public class Tab1 extends android.support.v4.app.Fragment implements AdapterView.OnItemSelectedListener{
 
     BroadcastReceiver broadcastReceiver;
     Model_Phannhom model_phannhom_chi, model_phannhom_thu;
@@ -486,23 +481,6 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
             e.printStackTrace();
         }
         super.onDestroy();
-    }
-
-    @Override
-    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Calendar cal = new java.util.GregorianCalendar();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, monthOfYear);
-        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        tvDateTime.setText(dateFormat.format(cal.getTime()));
-    }
-
-    @Override
-    public void onTimeSet(ViewGroup viewGroup, int hourOfDay, int minute) {
-        Calendar cal = new java.util.GregorianCalendar();
-        cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        cal.set(Calendar.MINUTE, minute);
     }
 
     private int TimeOut(int milisecond) {

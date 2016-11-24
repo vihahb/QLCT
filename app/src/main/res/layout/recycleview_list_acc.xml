@@ -1,12 +1,17 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/WhiteBackground"
-    card_view:cardCornerRadius="5dp">
+    style="@style/WhiteBackgroundCard"
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardCornerRadius="1dp"
+    card_view:cardUseCompatPadding="false">
 
     <LinearLayout
+        android:layout_marginLeft="@dimen/size_9"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"

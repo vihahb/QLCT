@@ -45,10 +45,6 @@
             android:label="@string/add_acc"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TypeMoney" />
-        <activity
-            android:name=".splash_screen.StaticsActivity"
-            android:label="@string/title_activity_statics"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <receiver android:name=".broadcast.broadcastAlarmKeyNote"></receiver>
     </application>

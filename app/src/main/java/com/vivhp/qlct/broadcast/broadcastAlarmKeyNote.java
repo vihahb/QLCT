@@ -57,7 +57,7 @@ public class broadcastAlarmKeyNote extends BroadcastReceiver {
                 // Set Text
                 .setContentText(arlmess)
                 // Add an Action Button below Notification
-                .addAction(R.drawable.ic_add_circle_24dp, "Thêm giao dịch", pIntent)
+//                .addAction(R.drawable.ic_add_circle_24dp, "Thêm giao dịch", pIntent)
                 // Set PendingIntent into Notification
                 .setContentIntent(pIntent)
                 // Dismiss Notification

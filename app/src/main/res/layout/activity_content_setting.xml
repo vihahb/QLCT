@@ -9,23 +9,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.vivhp.qlct.SettingActivity"
     tools:showIn="@layout/activity_setting">
-
-    <LinearLayout
-        android:paddingLeft="@dimen/size_16"
-        android:id="@+id/lnTitleInfo"
-        android:background="@color/Gray_eee"
+    <TextView
+        android:id="@+id/line0"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_36">
-
-        <TextView
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/siza_10"
-            android:textStyle="bold"
-            android:textColor="@color/rectage_btn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_36"
-            android:text="@string/info" />
-    </LinearLayout>
+        android:layout_height="1dp"
+        android:background="@color/color_37718E" />
 
     <LinearLayout
         android:paddingLeft="@dimen/siza_24"
@@ -99,7 +87,7 @@
     <LinearLayout
         android:paddingLeft="@dimen/size_16"
         android:id="@+id/lnTitleTeam"
-        android:background="@color/Gray_eee"
+        android:background="@color/colorPrimary"
         android:layout_below="@+id/lnLanguage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_36">
@@ -108,7 +96,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/siza_10"
             android:textStyle="bold"
-            android:textColor="@color/rectage_btn"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_36"
             android:text="@string/more_info" />
@@ -260,5 +248,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/permission" />
+
+    <LinearLayout
+        android:paddingLeft="@dimen/size_16"
+        android:id="@+id/lnTitleInfo"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_36"
+        android:layout_below="@+id/line0"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/siza_10"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_36"
+            android:text="@string/info" />
+    </LinearLayout>
 
 </RelativeLayout>

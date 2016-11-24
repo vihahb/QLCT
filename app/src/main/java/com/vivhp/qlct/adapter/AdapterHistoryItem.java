@@ -24,6 +24,18 @@ import java.util.ArrayList;
 
 public class AdapterHistoryItem extends ArrayAdapter<ModelHistory> {
 
+    /**
+     * Trong hàm getView
+     * ở phần
+     *
+     * if(chi){
+     *     txtSotien.setText(" - " + String.valueOf(history.getSotien()));
+     * }
+     *
+     * có nghĩa là nếu đúng bằng chi thì trước số tiền get từ db ra, tôi sẽ cho " - ".
+     * (Chú ý dấu cách nhé. 1 ký tự cách -> dấu trừ -> 1 ký tự cách)
+     * **/
+
     Activity context = null;
     int LayoutId;
     ArrayList<ModelHistory> arrayList;
@@ -73,6 +85,10 @@ public class AdapterHistoryItem extends ArrayAdapter<ModelHistory> {
 
                 if (chi) {
                     txtTenKhoan.setTextColor(convertView.getResources().getColor(R.color.color_chi));
+
+                    //Ông thực hiện sửa cái dòng này
+                    txtSotien.setText(" - " + String.valueOf(history.getSotien()));
+
                 } else
                     txtTenKhoan.setTextColor(convertView.getResources().getColor(R.color.colorPrimary));
 
