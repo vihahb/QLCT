@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vivhp.qlct.DoiTienLS;
 import com.vivhp.qlct.HienDoiTien;
 import com.vivhp.qlct.Model.ModelHistory;
 import com.vivhp.qlct.R;
@@ -61,8 +62,14 @@ public class AdapterHistoryItem extends ArrayAdapter<ModelHistory> {
 
                 txtTenNhom = (TextView) convertView.findViewById(R.id.txtTennhom);
                 txtTenKhoan = (TextView) convertView.findViewById(R.id.txtTenKhoan);
+
+
+
                 txtSotien = (TextView) convertView.findViewById(R.id.txtMoney);
-                txtSotien.addTextChangedListener(new HienDoiTien(txtSotien));
+                txtSotien.addTextChangedListener(new DoiTienLS(txtSotien));
+
+
+
                 txtLydo = (TextView) convertView.findViewById(R.id.txtLydo);
                 txtTenTK = (TextView) convertView.findViewById(R.id.txtTenTK);
 
@@ -88,6 +95,7 @@ public class AdapterHistoryItem extends ArrayAdapter<ModelHistory> {
 
                     //Ông thực hiện sửa cái dòng này
                     txtSotien.setText(" - " + String.valueOf(history.getSotien()));
+                    //history.getSotien() =  history.getSotien().replace("-.", "-");
 
                 } else
                     txtTenKhoan.setTextColor(convertView.getResources().getColor(R.color.colorPrimary));
