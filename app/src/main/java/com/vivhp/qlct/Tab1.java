@@ -119,6 +119,7 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getExtras().getInt("b") == 1){
+                    spinner_transaction.setSelection(0);
                     model_phannhom_chi = (Model_Phannhom) intent.getSerializableExtra("p");
                     Constants.model_phannhom_chi = model_phannhom_chi;
                     Log.e("Model phannhom c ten: ", model_phannhom_chi.getTennhom());
@@ -126,11 +127,12 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
                     Constants.model_phannhom_chi = null;
                 }
                 if (intent.getExtras().getInt("b") == 2){
+                    spinner_transaction.setSelection(1);
                     model_phannhom_thu = (Model_Phannhom) intent.getSerializableExtra("p");
                     Log.e("Model phannhom t ten: ", model_phannhom_thu.getTennhom());
                     Constants.model_phannhom_thu = model_phannhom_thu;
                     phannhomArrayList.add(Constants.model_phannhom_thu);
-                    Constants.model_phannhom_chi = null;
+                    Constants.model_phannhom_thu = null;
                 }
                 if (intent.getExtras().getInt("b") == 3) {
                     receiverIntentChi();

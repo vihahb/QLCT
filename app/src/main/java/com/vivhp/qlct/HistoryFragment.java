@@ -2,6 +2,7 @@ package com.vivhp.qlct;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,7 +40,7 @@ public class HistoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.history_fragment, container, false);
+        View view = inflater.inflate(R.layout.history_fragment, null, false);
 
         dataBaseHelper = new DataBaseHelper(getActivity());
         lv_history = (ListView) view.findViewById(R.id.lvThongtin);
