@@ -14,11 +14,8 @@ public class DoiSoTien implements TextWatcher {
 
     EditText editText;
 
-
     public DoiSoTien(EditText editText) {
         this.editText = editText;
-
-
     }
 
     @Override
@@ -36,7 +33,6 @@ public class DoiSoTien implements TextWatcher {
         try {
             editText.removeTextChangedListener(this);
             String value = editText.getText().toString();
-
 
             if (value != null && !value.equals("")) {
 
@@ -91,16 +87,13 @@ public class DoiSoTien implements TextWatcher {
             str3 = str1.charAt(k) + str3;
             i++;
         }
-
     }
 
     public static String trimCommaOfString(String string) {
-//        String returnString;
         if (string.contains(",")) {
             return string.replace(",", "");
         } else {
             return string;
         }
-
     }
 }

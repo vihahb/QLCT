@@ -13,7 +13,6 @@ import com.vivhp.qlct.Model.Model_Phannhom;
 import com.vivhp.qlct.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by vivhp on 10/22/2016.
@@ -62,8 +61,10 @@ public class List_Phannhom_Adapter extends ArrayAdapter<Model_Phannhom> {
         //Get resource icon
         if (tv_khoan.getText().toString().equals("Khoản Thu")) {
             icon.setImageResource(R.mipmap.ic_trending_up_black_24dp1);
+            tv_khoan.setTextColor(convertView.getResources().getColor(R.color.child_hb));
         } else if (tv_khoan.getText().toString().equals("Khoản Chi")) {
             icon.setImageResource(R.mipmap.ic_trending_down_black_24dp1);
+            tv_khoan.setTextColor(convertView.getResources().getColor(R.color.color_red));
         }
 
         return convertView;

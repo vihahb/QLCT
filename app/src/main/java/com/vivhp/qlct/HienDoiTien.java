@@ -2,7 +2,6 @@ package com.vivhp.qlct;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.StringTokenizer;
@@ -16,7 +15,7 @@ public class HienDoiTien implements TextWatcher {
     TextView textView;
 
 
-    public HienDoiTien (TextView textView) {
+    public HienDoiTien(TextView textView) {
         this.textView = textView;
 
 
@@ -38,7 +37,6 @@ public class HienDoiTien implements TextWatcher {
             textView.removeTextChangedListener(this);
             String value = textView.getText().toString();
 
-
             if (value != null && !value.equals("")) {
 
                 if (value.startsWith(".")) {
@@ -49,7 +47,6 @@ public class HienDoiTien implements TextWatcher {
 
                 }
 
-                // String str = textView.getText().toString().replaceAll("[\\D]", "");
                 String str = textView.getText().toString().replaceAll("\\.", "");
                 if (!value.equals(""))
                     textView.setText(getDecimalFormattedString(str));
@@ -61,7 +58,6 @@ public class HienDoiTien implements TextWatcher {
             ex.printStackTrace();
             textView.addTextChangedListener(this);
         }
-
     }
 
     public static String getDecimalFormattedString(String value) {
@@ -98,23 +94,11 @@ public class HienDoiTien implements TextWatcher {
     }
 
     public static String trimCommaOfString(String string) {
-//        String returnString;
         if (string.contains(",")) {
-
             string = string.replace("-.", "-");
             return string.replace(",", "");
-
-            //return string.replace("-.", "-");
         } else {
             return string.replace("-.", "-");
-
-
-            //string = string.replace("-.", "-");
-            //return string.replace("-.", "-");
-            //return string;
-
-
         }
-
     }
 }

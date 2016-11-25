@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.vivhp.qlct.Model.ModelHistory;
-import com.vivhp.qlct.Model.ModelTaiKhoan;
 import com.vivhp.qlct.Model.Model_Phannhom;
 import com.vivhp.qlct.Model.Model_Taikhoan;
 import com.vivhp.qlct.Model.Model_Thongke;
@@ -34,7 +33,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super(context, Database_Name, null, Database_Version);
     }
 
-    /**
+    /**     --- DỮ LIỆU CŨ ---
      * Tạo các bảng trong cơ sở dữ liệu
      * 1. Bảng Tài Khoản
      * + id - int - PKey AI
@@ -96,10 +95,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             + COLUMN_TAIKHOAN_TENTK + " TEXT, "
             + COLUMN_TAIKHOAN_LOAIHINH + " TEXT, "
             + COLUMN_TAIKHOAN_SOTIEN + " TEXT" + ")";
-//    bản này ah ô
-    /**
-     * ông lấy tên nhóm ở khoản thu với sô tiền mà nhóm đó sử dụng ấy
-     * **/
 
     String phannhom = "CREATE TABLE " + TABLE_PHANNHOM + "("
             + COLUMN_PHANNHOM_MANHOM + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -114,23 +109,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             + COLUMN_THUCHI_ID_TK + " INT CONSTRAINT " + COLUMN_THUCHI_ID_TK + " REFERENCES " + TABLE_TAIKHOAN + "(" + COLUMN_TAIKHOAN_ID_TK + ")" + " ON DELETE CASCADE,"
             + COLUMN_THUCHI_MANHOM + " INT CONSTRAINT " + COLUMN_THUCHI_MANHOM + " REFERENCES " + TABLE_PHANNHOM + "(" + COLUMN_PHANNHOM_MANHOM + ")" + " ON DELETE CASCADE"
             + ")";
-//    nhìn ở đây màn ô nhỏ qusa 2 man ma, ô tắt bớt 1 màn đi, đỡ hơn r ok
-
-
-//    String giaodich = "CREATE TABLE " + TABLE_GIAODICH + "("
-//            + COLUMN_GIAODICH_MAGIAODICH + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-//            + COLUMN_GIAODICH_LYDO + " TEXT, "
-//            + COLUMN_GIAODICH_TRANGTHAI + " TEXT, "
-//            + COLUMN_GIAODICH_GIO + " TIME, "
-//            + COLUMN_GIAODICH_MATHUCHI + " INT CONSTRAINT " + COLUMN_GIAODICH_MATHUCHI + " REFERENCES " + TABLE_THUCHI + "(" + COLUMN_THUCHI_MATHUCHI + ")" + " ON DELETE CASCADE"
-//            + ")";
-
-//    public ArrayList<ModelTaiKhoan> getAllTaikhoan() {
-//        SQLiteDatabase database = this.getReadableDatabase();
-//        ArrayList<ModelTaiKhoan> arrayList = new ArrayList<>();
-//
-////        String query = "select * from " + TABLE_TAIKHOAN + " inner join " + ;
-//    }
 
     String TAIKHOAN1 = "INSERT INTO " + TABLE_TAIKHOAN + "  Values ('1','Ví','Tiền Mặt','');";
     String TAIKHOAN2 = "INSERT INTO " + TABLE_TAIKHOAN + "  Values ('2','Thẻ tín dụng','Thẻ Tín Dụng','0');";
@@ -289,7 +267,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return taikhoanList;
     }
 
-
+    //Get tài khoản cuối cùng
     public Model_Taikhoan getFinalTenTaiKhoan() {
         Model_Taikhoan taikhoanList = new Model_Taikhoan();
         //Select all query
@@ -443,28 +421,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return list;
     }
-//    //get Last Thu
-//    public Model_Phannhom getLastKhoanThu() {
-//        Model_Phannhom phannhom = new Model_Phannhom();
-//        //Select Query
-//        String queryKT = "Select * from " + TABLE_PHANNHOM + " where " + COLUMN_PHANNHOM_TENKHOAN + "=\"Khoản Thu\"";
-//        SQLiteDatabase database = this.getReadableDatabase();
 //
-//        Cursor cursor = database.rawQuery(queryKT, null);
-//
-//        //Loop to add row to list
-//        if (cursor.getCount() > 0) {
-//            cursor.moveToLast();
-//            phannhom.setManhom(cursor.getInt(cursor.getColumnIndex(COLUMN_PHANNHOM_MANHOM)));
-//            phannhom.setTennhom(cursor.getString(cursor.getColumnIndex(COLUMN_PHANNHOM_TENNHOM)));
-//            phannhom.setTenkhoan(cursor.getString(cursor.getColumnIndex(COLUMN_PHANNHOM_TENKHOAN)));
-//
-//        }
-//        cursor.close();
-//
-//        return phannhom;
-//    }
-
     /**
      * Done
      **/
@@ -493,28 +450,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return list;
     }
-
-//    //Get Last Chi
-//    public Model_Phannhom getLastKhoanChi() {
-//        Model_Phannhom phannhom = new Model_Phannhom();
-//        //Select Query
-//        String queryKT = "Select * from " + TABLE_PHANNHOM + " where " + COLUMN_PHANNHOM_TENKHOAN + "=\"Khoản Chi\"";
-//        SQLiteDatabase database = this.getReadableDatabase();
-//
-//        Cursor cursor = database.rawQuery(queryKT, null);
-//
-//        //Loop to add row to list
-//        if (cursor.getCount() > 0) {
-//            cursor.moveToLast();
-//            phannhom.setManhom(cursor.getInt(cursor.getColumnIndex(COLUMN_PHANNHOM_MANHOM)));
-//            phannhom.setTennhom(cursor.getString(cursor.getColumnIndex(COLUMN_PHANNHOM_TENNHOM)));
-//            phannhom.setTenkhoan(cursor.getString(cursor.getColumnIndex(COLUMN_PHANNHOM_TENKHOAN)));
-//
-//        }
-//        cursor.close();
-//
-//        return phannhom;
-//    }
 
     /**
      * Done
@@ -608,7 +543,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Done
+     * Done - Bỏ không sử dụng.
      **/
     //Xoá nhóm
     public void deleteNhom(Model_Phannhom phannhom) {
@@ -645,33 +580,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         database.close();
     }
 
-    //Get All Thu/Chi
-    public ArrayList<Model_Thuchi> getAllThuChi() {
-        ArrayList<Model_Thuchi> list = new ArrayList<Model_Thuchi>();
-        //Select Query
-        String query = "Select * from " + TABLE_THUCHI;
-        SQLiteDatabase database = this.getReadableDatabase();
-
-        Cursor cursor = database.rawQuery(query, null);
-
-        //Loop to add row to list
-        if (cursor.moveToFirst()) {
-            do {
-                Model_Thuchi thuchi = new Model_Thuchi();
-                thuchi.setSotien(cursor.getInt(cursor.getColumnIndex(COLUMN_THUCHI_SOTIEN)));
-                thuchi.setNgay(cursor.getString(cursor.getColumnIndex(COLUMN_THUCHI_NGAY)));
-                thuchi.setLydo(cursor.getString(cursor.getColumnIndex(COLUMN_THUCHI_LYDO)));
-                thuchi.setId_tk(cursor.getInt(cursor.getColumnIndex(COLUMN_THUCHI_ID_TK)));
-                thuchi.setManhom(cursor.getInt(cursor.getColumnIndex(COLUMN_THUCHI_MANHOM)));
-                //Add to List
-                list.add(thuchi);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-
-        return list;
-    }
-
     //Get Chi Tiet Thu Chi
     public ArrayList<ModelHistory> getThuChi(String ngay) {
 
@@ -684,11 +592,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                         tblthuchi ON tblphannhom.manhom = tblthuchi.manhom INNER JOIN\n" +
                 "                        tbltaikhoan ON tblthuchi.id_tk = tbltaikhoan._id\n" +
                 "WHERE ngay = " + "'" +ngay + "'";
-
-        String query = "select tblthuchi.sotien, ngay, lydo, trangthai, tbltaikhoan.loaihinh" +
-                " from tblphannhom inner join" +
-                " tblthuchi ON tblphannhom.manhom = tblthuchi.manhom" +
-                " inner join tbltaikhoan ON tblthuchi.id_tk = tbltaikhoan._id where ngay = ?";
 
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -720,14 +623,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                                   tbltaikhoan ON tblthuchi.id_tk = tbltaikhoan._id\n" +
                 "          \n" +
                 "                where tblphannhom.tenkhoan = \"Khoản Chi\" AND ngay like '" + ngay +"' group by tblphannhom.tennhom\n";
-
-//        String querys = "SELECT        tblphannhom.tennhom, tblphannhom.tenkhoan, SUM (tblthuchi.sotien) AS TotalMoney\n" +
-//                "\n" +
-//                "              FROM          tblphannhom INNER JOIN\n" +
-//                "                                   tblthuchi ON tblphannhom.manhom = tblthuchi.manhom INNER JOIN\n" +
-//                "            ngay LIKE '%" + ngay +"%' AND                        tbltaikhoan ON tblthuchi.id_tk = tbltaikhoan._id\n" +
-//                "          \n" +
-//                "WHERE ngay like '% " + ngay + "%' AND tblphannhom.tenkhoan = \"Khoản Chi\" group by tblphannhom.tennhom";
 
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -762,14 +657,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                                   tbltaikhoan ON tblthuchi.id_tk = tbltaikhoan._id\n" +
                 "          \n" +
                 "                where tblphannhom.tenkhoan = \"Khoản Chi\" AND ngay like '%" + ngay +"%' group by tblphannhom.tennhom\n";
-
-//        String querys = "SELECT        tblphannhom.tennhom, tblphannhom.tenkhoan, SUM (tblthuchi.sotien) AS TotalMoney\n" +
-//                "\n" +
-//                "              FROM          tblphannhom INNER JOIN\n" +
-//                "                                   tblthuchi ON tblphannhom.manhom = tblthuchi.manhom INNER JOIN\n" +
-//                "            ngay LIKE '%" + ngay +"%' AND                        tbltaikhoan ON tblthuchi.id_tk = tbltaikhoan._id\n" +
-//                "          \n" +
-//                "WHERE ngay like '% " + ngay + "%' AND tblphannhom.tenkhoan = \"Khoản Chi\" group by tblphannhom.tennhom";
 
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -874,19 +761,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return arr;
     }
 
-    //Get So tien trong thu Chi
-    public Model_Thuchi getTienThuChi(int mathuchi) {
-        String query = "SELECT sotien FROM tblthuchi ORDER BY mathuchi DESC LIMIT 1";
-        SQLiteDatabase database = this.getWritableDatabase();
-        Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(mathuchi)});
-
-        Model_Thuchi thuchi = new Model_Thuchi();
-        if (cursor != null && cursor.moveToFirst()) {
-            thuchi = new Model_Thuchi(cursor.getInt(cursor.getColumnIndex("sotien")));
-            cursor.close();
-        }
-        return thuchi;
-    }
     /**
      * TABLE THUCHI
      * END

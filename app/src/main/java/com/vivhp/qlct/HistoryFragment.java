@@ -4,15 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vivhp.qlct.DBHelper.DataBaseHelper;
 import com.vivhp.qlct.Model.ModelHistory;
@@ -63,7 +60,7 @@ public class HistoryFragment extends Fragment {
 
     }
 
-    //Get Thu Chi
+    //Get Thu Chi LOG
     public void getThuChi() {
         historyArrayList = new ArrayList<ModelHistory>();
         historyArrayList = dataBaseHelper.getThuChi(ngay);

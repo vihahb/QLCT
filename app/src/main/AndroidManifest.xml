@@ -46,7 +46,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TypeMoney" />
 
-        <receiver android:name=".broadcast.broadcastAlarmKeyNote"></receiver>
     </application>
 
 </manifest>

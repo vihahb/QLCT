@@ -1,6 +1,5 @@
 package com.vivhp.qlct.adapter;
 
-import android.app.Activity;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vivhp.qlct.DBHelper.DataBaseHelper;
 import com.vivhp.qlct.HienDoiTien;
 import com.vivhp.qlct.Model.Model_Taikhoan;
 import com.vivhp.qlct.R;
@@ -140,18 +138,6 @@ public class RecycleViewAdapterTaiKhoan extends RecyclerView.Adapter<RecycleView
         } else
             holder.img_tk.setImageResource(R.mipmap.ic_t04);
     }
-
-
-    public void addItem(int position, Model_Taikhoan model_taikhoan) {
-        arrayList.add(position, model_taikhoan);
-        notifyItemInserted(position);
-    }
-
-    public void removeItem(int position) {
-        arrayList.remove(position);
-        notifyItemRemoved(position);
-    }
-
 
     @Override
     public int getItemCount() {
