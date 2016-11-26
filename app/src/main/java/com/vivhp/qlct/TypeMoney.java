@@ -61,8 +61,6 @@ public class TypeMoney extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        Intent intent = new Intent(this, AddAccActivity.class);
-//        startActivity(intent);
         finish();
     }
 }

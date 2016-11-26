@@ -55,8 +55,10 @@ public class Spinner_adapter extends ArrayAdapter<Model_Phannhom> {
 
         if (chi) {
             icon_sp.setImageResource(R.mipmap.ic_trending_down_black_24dp1);
+            tv_name.setTextColor(row.getResources().getColor(R.color.color_red));
         } else {
             icon_sp.setImageResource(R.mipmap.ic_trending_up_black_24dp1);
+            tv_name.setTextColor(row.getResources().getColor(R.color.child_hb));
         }
 
         return row;
@@ -91,8 +93,10 @@ public class Spinner_adapter extends ArrayAdapter<Model_Phannhom> {
 
         if (chi) {
             icon_sp.setImageResource(R.mipmap.ic_trending_down_black_24dp1);
+            tv_name.setTextColor(row.getResources().getColor(R.color.color_red));
         } else {
             icon_sp.setImageResource(R.mipmap.ic_trending_up_black_24dp1);
+            tv_name.setTextColor(row.getResources().getColor(R.color.child_hb));
         }
 
         return row;

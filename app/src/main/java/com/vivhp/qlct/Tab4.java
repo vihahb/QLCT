@@ -14,9 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vivhp.qlct.DBHelper.DataBaseHelper;
 import com.vivhp.qlct.Model.Model_Taikhoan;
@@ -41,25 +39,7 @@ public class Tab4 extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab4_status, container, false);
-
-
-        //Khởi tạo một ArrayList mới
-//        arrayList = new ArrayList<Model_Taikhoan>();
-        //Fill data to arrayList
         broadcast();
-
-        /**
-         * LinearLayoutManager bắt buộc phải có
-         * Khi sử dụng RecycleView vì nó hỗ trợ sắp
-         * xếp các View theo hướng ngang hoặc dọc...**/
-        /**
-         * Tham số chính:
-         * - Context
-         * - Hướng Chỉ định
-         * - Nếu tham số này được set là true thì các item views sẽ hiển thị theo thứ tự ngược lại so với mảng các items được đưa vào trong adapter
-         * **/
-
-
         return rootView;
     }
 
@@ -81,9 +61,19 @@ public class Tab4 extends android.support.v4.app.Fragment {
     }
 
     private void initRecyclerview(View view) {
+        /**
+         * LinearLayoutManager bắt buộc phải có
+         * Khi sử dụng RecycleView vì nó hỗ trợ sắp
+         * xếp các View theo hướng ngang hoặc dọc...**/
         lv_taikhoan = (RecyclerView) view.findViewById(R.id.lv_taikhoan);
         lv_taikhoan.setHasFixedSize(true);
 
+        /**
+         * Tham số chính:
+         * - Context
+         * - Hướng Chỉ định
+         * - Nếu tham số này được set là true thì các item views sẽ hiển thị theo thứ tự ngược lại so với mảng các items được đưa vào trong adapter
+         * **/
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         lv_taikhoan.setLayoutManager(linearLayoutManager);
 
@@ -144,7 +134,6 @@ public class Tab4 extends android.support.v4.app.Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-//            Toast.makeText(getContext(), "update ok" + arrayList.size(), Toast.LENGTH_SHORT).show();
             adapterTaiKhoan.updateData(arrayList);
             initSumMoney();
         }

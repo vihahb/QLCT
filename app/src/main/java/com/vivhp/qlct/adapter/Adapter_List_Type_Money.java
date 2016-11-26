@@ -1,7 +1,6 @@
 package com.vivhp.qlct.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vivhp.qlct.AddAccActivity;
 import com.vivhp.qlct.Model.Model_List_Type_Money;
 import com.vivhp.qlct.R;
 
@@ -48,8 +46,6 @@ public class Adapter_List_Type_Money extends ArrayAdapter<Model_List_Type_Money>
             LayoutInflater layoutInflater = context.getLayoutInflater();
             convertView = layoutInflater.inflate(Layout_Id, null);
         }
-
-        Model_List_Type_Money typeMoney = arList.get(position);
 
         //Định nghĩa các control của 1 item
         ImageView icon_type = (ImageView) convertView.findViewById(R.id.icon_type_money);

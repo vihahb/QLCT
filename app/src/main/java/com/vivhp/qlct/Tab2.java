@@ -302,7 +302,6 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
         adapterListTab2 = new AdapterListTab2(getActivity(), R.layout.list_item_tab2, arrModel);
         lv_group_t2.setAdapter(adapterListTab2);
         adapterListTab2.updateKhoan(true);
-//        adapterListTab2.notifyDataSetChanged();
     }
 
     private void initDataListThuDate() {
@@ -311,7 +310,6 @@ public class Tab2 extends android.support.v4.app.Fragment implements AdapterView
         adapterListTab2 = new AdapterListTab2(getActivity(), R.layout.list_item_tab2, arrModel);
         lv_group_t2.setAdapter(adapterListTab2);
         adapterListTab2.updateKhoan(false);
-//        adapterListTab2.notifyDataSetChanged();
     }
 
     private void broadcast(){

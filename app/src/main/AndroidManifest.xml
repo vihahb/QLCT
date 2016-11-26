@@ -35,6 +35,7 @@
         <activity
             android:name=".ActivityHistory"
             android:label="@string/history"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SettingActivity"
@@ -46,7 +47,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TypeMoney" />
 
-        <receiver android:name=".broadcast.broadcastAlarmKeyNote"></receiver>
     </application>
 
 </manifest>

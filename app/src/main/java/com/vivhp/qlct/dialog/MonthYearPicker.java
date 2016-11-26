@@ -3,7 +3,6 @@ package com.vivhp.qlct.dialog;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.NumberPicker;
 

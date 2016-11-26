@@ -13,7 +13,6 @@ import com.vivhp.qlct.Model.Model_Phannhom;
 import com.vivhp.qlct.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by vivhp on 10/22/2016.

@@ -1,19 +1,14 @@
 package com.vivhp.qlct;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.LayoutInflaterCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,18 +16,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.vivhp.qlct.DBHelper.DataBaseHelper;
-import com.vivhp.qlct.broadcast.broadcastAlarmKeyNote;
-import com.vivhp.qlct.Model.Model_Phannhom;
-import com.vivhp.qlct.Model.Model_Taikhoan;
+
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -40,19 +29,12 @@ public class MainActivity extends AppCompatActivity
 
     //This is our tab layout
     TabLayout tabLayout;
-
     //This is our viewPage
     ViewPager viewPager;
-
     //This is Toolbar
     Toolbar toolbar;
-
     //Broadcast
     BroadcastReceiver broadcastReceiver;
-
-    //Notification Manager
-    PendingIntent pendingIntent;
-
     DataBaseHelper dataBaseHelper;
 
     int currentPage;
@@ -79,7 +61,6 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle(R.string.Tab1);
 
         dataBaseHelper = new DataBaseHelper(getApplicationContext());
-//        addToTaikhoan();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -107,19 +88,15 @@ public class MainActivity extends AppCompatActivity
                 currentPage = tab.getPosition();
 
                 if (currentPage == 0) {
-//                    tabLayout.getTabAt(0).setIcon(tabIconsSelected[0]);
                     toolbar.setTitle(R.string.Tab1);
                 }
                 if (currentPage == 1) {
-//                    tabLayout.getTabAt(1).setIcon(tabIconsSelected[1]);
                     toolbar.setTitle(R.string.Tab2);
                 }
                 if (currentPage == 2) {
-//                    tabLayout.getTabAt(2).setIcon(tabIconsSelected[2]);
                     toolbar.setTitle(R.string.Tab3);
                 }
                 if (currentPage == 3) {
-                    tabLayout.getTabAt(3).setIcon(tabIconsSelected[3]);
                     toolbar.setTitle(R.string.Tab4);
                 }
             }
@@ -209,16 +186,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-//    //initNotification
-//    public void initNotification(){
-//        Intent intent = new Intent(this, broadcastAlarmKeyNote.class);
-//        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        long time = 280000;
-////        Toast.makeText(this, "Scheduled", Toast.LENGTH_SHORT).show();
-////        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + time, time, pendingIntent);
-//    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -226,12 +193,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 

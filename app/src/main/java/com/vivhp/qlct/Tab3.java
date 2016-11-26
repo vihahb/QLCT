@@ -25,12 +25,10 @@ import android.widget.Toast;
 
 import com.vivhp.qlct.DBHelper.DataBaseHelper;
 import com.vivhp.qlct.Model.Model_Phannhom;
-import com.vivhp.qlct.Model.Model_Taikhoan;
 import com.vivhp.qlct.adapter.List_Phannhom_Adapter;
 import com.vivhp.qlct.dialog.DialogProgressBar;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by vivhp on 10/16/2016.
@@ -80,21 +78,16 @@ public class Tab3 extends android.support.v4.app.Fragment implements AdapterView
         //Initialization Spinner Library
         spinner_group1 = (Spinner) rootView.findViewById(R.id.spinner_group1);
         spinner_transaction_group = (Spinner) rootView.findViewById(R.id.spinner_transaction_group);
-
         /**
          * Hàm Thực Thi
          * **/
         //Set Hiển Thi cho LítView
         setListView();
-
         //SetData cho spinner
         setDataSpinnerLK();
-
         //ImageButton Click
         imgBtnCliked();
         updateNhom();
-
-//        deleteGroup();
         return rootView;
     }
 
@@ -252,26 +245,26 @@ public class Tab3 extends android.support.v4.app.Fragment implements AdapterView
     /**
      * Sự kiên thêm value cua nhóm vào database
      **/
-    public void addGroup() {
-        if (TextUtils.isEmpty(tennhom = input_group.getText().toString())) {
-            addGroupErr();
-        } else {
-            Model_Phannhom phannhom = new Model_Phannhom(tennhom, tenkhoan);
-            if (dataBaseHelper.addNhom(phannhom)){
-                Constants.model_phannhom_chi = dataBaseHelper.getLastTenNhomChi();
-                Constants.model_phannhom_thu = dataBaseHelper.getLastTenNhomThu();
-            }
-
-            addGroupSucc();
-            if (spinner_transaction_group.getSelectedItemPosition() == 0) {
-                spinner_group1.setSelection(1);
-            } else if (spinner_transaction_group.getSelectedItemPosition() == 1) {
-                spinner_group1.setSelection(2);
-            }
-        }
-
-        input_group.setText(null);
-    }
+//    public void addGroup() {
+//        if (TextUtils.isEmpty(tennhom = input_group.getText().toString())) {
+//            addGroupErr();
+//        } else {
+//            Model_Phannhom phannhom = new Model_Phannhom(tennhom, tenkhoan);
+//            if (dataBaseHelper.addNhom(phannhom)){
+//                Constants.model_phannhom_chi = dataBaseHelper.getLastTenNhomChi();
+//                Constants.model_phannhom_thu = dataBaseHelper.getLastTenNhomThu();
+//            }
+//
+//            addGroupSucc();
+//            if (spinner_transaction_group.getSelectedItemPosition() == 0) {
+//                spinner_group1.setSelection(1);
+//            } else if (spinner_transaction_group.getSelectedItemPosition() == 1) {
+//                spinner_group1.setSelection(2);
+//            }
+//        }
+//
+//        input_group.setText(null);
+//    }
 
     public void addGroupT() {
         if (TextUtils.isEmpty(tennhom = input_group.getText().toString())) {
@@ -331,33 +324,33 @@ public class Tab3 extends android.support.v4.app.Fragment implements AdapterView
     /**
      * Sự kiên thêm value cua nhóm Thu vào database
      **/
-    public void addGroupThu() {
-        spinner_transaction_group.setSelection(0);
-        if (TextUtils.isEmpty(tennhom = input_group.getText().toString())) {
-            addGroupErr();
-        } else {
-            dataBaseHelper.addNhom(new Model_Phannhom(tennhom, tenkhoan));
-            addGroupSucc();
-            setListViewThu();
-        }
-        spinner_group1.setSelection(1);
-        input_group.setText(null);
-    }
+//    public void addGroupThu() {
+//        spinner_transaction_group.setSelection(0);
+//        if (TextUtils.isEmpty(tennhom = input_group.getText().toString())) {
+//            addGroupErr();
+//        } else {
+//            dataBaseHelper.addNhom(new Model_Phannhom(tennhom, tenkhoan));
+//            addGroupSucc();
+//            setListViewThu();
+//        }
+//        spinner_group1.setSelection(1);
+//        input_group.setText(null);
+//    }
 
     /**
      * Sự kiên thêm value cua nhóm Thu vào database
      **/
-    public void addGroupChi() {
-        spinner_transaction_group.setSelection(1);
-        if (TextUtils.isEmpty(tennhom = input_group.getText().toString())) {
-            addGroupErr();
-        } else {
-            dataBaseHelper.addNhom(new Model_Phannhom(tennhom, tenkhoan));
-            addGroupSucc();
-        }
-        spinner_group1.setSelection(1);
-        input_group.setText(null);
-    }
+//    public void addGroupChi() {
+//        spinner_transaction_group.setSelection(1);
+//        if (TextUtils.isEmpty(tennhom = input_group.getText().toString())) {
+//            addGroupErr();
+//        } else {
+//            dataBaseHelper.addNhom(new Model_Phannhom(tennhom, tenkhoan));
+//            addGroupSucc();
+//        }
+//        spinner_group1.setSelection(1);
+//        input_group.setText(null);
+//    }
 
     /**
      * Sự kiện thêm nhóm bị lỗi
@@ -432,11 +425,9 @@ public class Tab3 extends android.support.v4.app.Fragment implements AdapterView
                 if (selectedId == R.id.radio_chi) {
                     st_khoan = rdo_chi.getText().toString();
                     value_receiver = 1;
-//                    Toast.makeText(getActivity(), "Ten khoản: " + st_khoan, Toast.LENGTH_SHORT).show();
                 } else {
                     st_khoan = rdo_thu.getText().toString();
                     value_receiver = 2;
-//                    Toast.makeText(getActivity(), "Ten khoản: " + st_khoan, Toast.LENGTH_SHORT).show();
                 }
                 st_nhom = edt_nhom.getText().toString();
 
@@ -459,18 +450,16 @@ public class Tab3 extends android.support.v4.app.Fragment implements AdapterView
                         setListView();
                         if (value_receiver == 1) {
                             Intent intent = new Intent("2");
-//                        intent.putExtra("p", "");
                             intent.putExtra("b", 3);
                             getActivity().sendBroadcast(intent);
                         }
                         if (value_receiver == 2) {
                             Intent intent = new Intent("2");
-//                        intent.putExtra("p", "");
                             intent.putExtra("b", 4);
                             getActivity().sendBroadcast(intent);
                         }
                     }
-                }, 2000);
+                }, 1000);
             }
         });
         AlertDialog alertDialog = dialog.create();

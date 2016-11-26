@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -121,20 +119,20 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getExtras().getInt("b") == 1){
+                    spinner_transaction.setSelection(0);
                     model_phannhom_chi = (Model_Phannhom) intent.getSerializableExtra("p");
                     Constants.model_phannhom_chi = model_phannhom_chi;
                     Log.e("Model phannhom c ten: ", model_phannhom_chi.getTennhom());
                     phannhomArrayList.add(Constants.model_phannhom_chi);
-//                    spinnerAdapter.notifyDataSetChanged();
                     Constants.model_phannhom_chi = null;
                 }
                 if (intent.getExtras().getInt("b") == 2){
+                    spinner_transaction.setSelection(1);
                     model_phannhom_thu = (Model_Phannhom) intent.getSerializableExtra("p");
                     Log.e("Model phannhom t ten: ", model_phannhom_thu.getTennhom());
                     Constants.model_phannhom_thu = model_phannhom_thu;
                     phannhomArrayList.add(Constants.model_phannhom_thu);
-//                    spinnerAdapter.notifyDataSetChanged();
-                    Constants.model_phannhom_chi = null;
+                    Constants.model_phannhom_thu = null;
                 }
                 if (intent.getExtras().getInt("b") == 3) {
                     receiverIntentChi();
@@ -269,7 +267,7 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
             getActivity().sendBroadcast(intent);
 
             progressBar.showProgressBar();
-            TimeOut(2000);
+            TimeOut(1000);
         }
 
 
@@ -308,13 +306,11 @@ public class Tab1 extends android.support.v4.app.Fragment implements AdapterView
 //            txt += "Cách 1: " + phannhomArrayList.get(position).getManhom();
 ////            or
 //            txt += ";  Cách 2: " +  + phannhomArrayList.get(spinner_group.getSelectedItemPosition()).getManhom();
-//            Toast.makeText(getContext(), temp_manhom, Toast.LENGTH_SHORT).show();
         }
         //Spinner Tai khoan
         if (parent.getId() == R.id.spinner_account) {
             tid_tk = taikhoanArrayList.get(position).get_id();
             temp_idtk = String.valueOf(taikhoanArrayList.get(position).get_id());
-//            Toast.makeText(getContext(), temp_idtk, Toast.LENGTH_SHORT).show();
         }
     }
 
