@@ -92,8 +92,7 @@ public class DoiTienLS implements TextWatcher {
             str3 = str3.replace("- .", "- ");
             str3 = str3.replace("-. ", "- ");
             str3 = str3.replace(".- ", "- ");
-            //str3 = str3.replace("-", "");
-            //str3 = str3.replace("-", "");
+
 
             i++;
         }
